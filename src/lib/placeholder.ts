@@ -26,6 +26,16 @@ function svgDataUri(svg: string): string {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg.replace(/\s+/g, " ").trim())}`;
 }
 
+/** Un SVG e XML, deci textul pus in el trebuie escapat. Fara asta, un nume
+ *  ca "Delta Resort & Spa" rupe fisierul si imaginea nu se mai afiseaza. */
+function xml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 /** Logo-substitut patrat, cu initialele clientului. */
 export function logoPlaceholder(nume: string, accent: CuloareAccent = "galben"): string {
   const txt = initiale(nume);
@@ -33,7 +43,7 @@ export function logoPlaceholder(nume: string, accent: CuloareAccent = "galben"):
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
       <rect x="6" y="6" width="188" height="188" rx="16" fill="${CULORI[accent]}" stroke="#111" stroke-width="8"/>
       <text x="100" y="100" font-family="Trebuchet MS, Verdana, sans-serif" font-size="72"
-            font-weight="700" fill="#111" text-anchor="middle" dominant-baseline="central">${txt}</text>
+            font-weight="700" fill="#111" text-anchor="middle" dominant-baseline="central">${xml(txt)}</text>
     </svg>`);
 }
 
@@ -48,7 +58,7 @@ export function avatarPlaceholder(nume: string, accent: CuloareAccent = "violet"
       <circle cx="148" cy="104" r="11" fill="#111"/>
       <path d="M88 148 Q120 176 152 148" stroke="#111" stroke-width="9" fill="none" stroke-linecap="round"/>
       <text x="120" y="212" font-family="Trebuchet MS, Verdana, sans-serif" font-size="26"
-            font-weight="700" fill="#111" text-anchor="middle">${txt}</text>
+            font-weight="700" fill="#111" text-anchor="middle">${xml(txt)}</text>
     </svg>`);
 }
 
@@ -66,7 +76,7 @@ export function screenshotPlaceholder(nume: string, accent: CuloareAccent = "gal
       <rect x="60" y="262" width="180" height="46" rx="10" fill="${CULORI[accent]}" stroke="#111" stroke-width="5"/>
       <rect x="480" y="120" width="252" height="188" rx="12" fill="${CULORI[accent]}" opacity=".5" stroke="#111" stroke-width="5"/>
       <text x="400" y="420" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24"
-            font-weight="700" fill="#111" opacity=".55" text-anchor="middle">${nume}</text>
+            font-weight="700" fill="#111" opacity=".55" text-anchor="middle">${xml(nume)}</text>
     </svg>`);
 }
 

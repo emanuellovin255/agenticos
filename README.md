@@ -39,6 +39,8 @@ Fiecare obiect din listă generează automat un logo pe prima pagină, un card �
 
 Ca să adaugi un client: copiază un bloc `{ ... }`, lipește-l în listă, schimbă datele.
 
+**`logo` și `logoFundal`** le completează scriptul de logouri, nu tu de mână. Vezi mai jos.
+
 **`linkSite`** e câmpul pe care îl completezi la final. Cât timp e `""`, butonul afișează
 „Site-ul se publică în curând" și nu duce nicăieri — nu rămâne niciun link rupt.
 Când pui adresa, butonul devine activ singur.
@@ -92,9 +94,27 @@ imagine lipsă nu lasă un pătrat gol.
 le optimizează la build — le-a dus de la ~4 MB la ~100 KB în total, trecându-le pe webp. Ca să
 schimbi o poză, înlocuiește fișierul păstrând același nume și gata.
 
+#### Logourile clienților
+
+Originalele stau în `/Logos/` (fișierele așa cum le-ai salvat de pe site-urile clienților).
+Nu le pui manual în `public/`. Rulezi:
+
+```bash
+npm run logos
+```
+
+Scriptul taie marginea goală din jurul fiecărui logo, îl curăță puțin ca să nu pară încețoșat
+pe ecran, îl salvează în `public/logos/` și îți spune culoarea fundalului fiecăruia. Culoarea
+aia o pui în `clienti.ts` la `logoFundal` — plăcuța din spatele logoului o primește, așa că
+logoul arată exact ca pe site-ul clientului, fără să-i stricăm contrastul.
+
+Ca să adaugi un logo nou: pune fișierul în `/Logos/` și adaugă-l în tabelul `HARTA` din
+`scripts/prep-logos.py` (nume de fișier → nume de slug). Scriptul are nevoie de Python 3 cu
+Pillow instalat.
+
 | Folder | Ce pui | Dimensiune recomandată |
 |---|---|---|
-| `public/logos/` | logourile clienților | pătrat, SVG sau PNG transparent |
+| `public/logos/` | logourile clienților | PNG, generat cu `npm run logos` |
 | `public/portofoliu/` | capturi din site-urile livrate | 1600×1000 |
 | `public/testimoniale/` | videoclipuri + postere | video vertical 9:16 |
 | `public/og-default.png` | imaginea de previzualizare la partajare | 1200×630 |

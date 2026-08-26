@@ -123,6 +123,94 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================================
+   PANOUL NEGRU CU LOGOURI
+   ------------------------------------------------------------
+   Panoul nu are margini: intra si iese din cremul paginii printr-un
+   degrade lung de 200px. Culorile intermediare sunt calculate cu o curba
+   lina (smoothstep), nu liniar — asa ochiul nu prinde niciun prag intre
+   crem si negru, doar o trecere continua.
+   ============================================================ */
+.panou {
+  position: relative;
+  isolation: isolate;
+  background-color: #0b0b0b;
+  background-image: linear-gradient(
+    to bottom,
+    #fff8e7 0px,
+    #fbf5e4 14px,
+    #f1ebdb 29px,
+    #e2dccd 43px,
+    #cfc9bb 57px,
+    #b8b3a7 71px,
+    #9f9b90 86px,
+    #858279 100px,
+    #6b6862 114px,
+    #52504b 129px,
+    #3b3a37 143px,
+    #282725 157px,
+    #191817 171px,
+    #0f0e0e 186px,
+    #0b0b0b 200px,
+    #0b0b0b calc(100% - 200px),
+    #0f0e0e calc(100% - 186px),
+    #191817 calc(100% - 171px),
+    #282725 calc(100% - 157px),
+    #3b3a37 calc(100% - 143px),
+    #52504b calc(100% - 129px),
+    #6b6862 calc(100% - 114px),
+    #858279 calc(100% - 100px),
+    #9f9b90 calc(100% - 86px),
+    #b8b3a7 calc(100% - 71px),
+    #cfc9bb calc(100% - 57px),
+    #e2dccd calc(100% - 43px),
+    #f1ebdb calc(100% - 29px),
+    #fbf5e4 calc(100% - 14px),
+    #fff8e7 100%
+  );
+
+}
+
+/* Un strat de granulatie foarte fin peste degrade. Pe suprafete mari,
+   trecerile lungi de culoare se sparg in dungi (banding) pentru ca ecranul
+   are doar 256 trepte pe canal; zgomotul le amesteca si dungile dispar. */
+.panou::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='z'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23z)'/></svg>");
+}
+
+/* Placuta din spatele unui logo. Primeste exact culoarea pe care logoul o
+   avea pe site-ul clientului (--fundal), ca sa nu-i stricam contrastul:
+   logourile albe raman pe fundal alb, cele aurii raman pe negru. */
+.placa-logo {
+  --fundal: #0b0b0b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--fundal);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+}
+
+/* Logoul umple placuta si se incadreaza singur in ea: `contain` il
+   micsoreaza pana incape intreg, fara sa-l taie si fara sa-l deformeze.
+   Asa arata la fel de bine si sigla patrata, si logoul-text foarte lat. */
+.placa-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  /* Randare mai clara la micsorare, pe motoarele care o suporta. */
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ============================================================
    MISCARE
    ============================================================ */
 
@@ -140,13 +228,16 @@ html.js-reveal .reveal.vizibil {
   translate: 0 0;
 }
 
-/* Banda de logouri, in bucla continua */
-@keyframes ruleaza {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+/* Banda de logouri, in bucla continua, de la stanga spre DREAPTA.
+   Lista de logouri e dublata in HTML, iar banda porneste deplasata cu -50%
+   (adica de la a doua copie) si aluneca pana la 0. Cand ajunge acolo, prima
+   copie e exact acolo unde era a doua — saltul inapoi nu se vede. */
+@keyframes ruleaza-dreapta {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }
 .banda {
-  animation: ruleaza 42s linear infinite;
+  animation: ruleaza-dreapta 78s linear infinite;
   will-change: transform;
 }
 .banda-container:hover .banda {

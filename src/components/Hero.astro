@@ -61,14 +61,18 @@ const primele = clienti.slice(0, 5);
       <ul class="flex -space-x-3">
         {primele.map((c) => (
           <li>
-            <img
-              src={logoSau(c.logo, c.nume, c.accent)}
-              alt=""
-              width="44"
-              height="44"
-              loading="eager"
-              class="h-11 w-11 rounded-full border-[3px] border-negru bg-crem object-cover"
-            />
+            <div
+              class="placa-logo h-11 w-[70px] border-[3px] border-negru p-1.5"
+              style={`--fundal: ${c.logoFundal?.trim() || "#101010"}`}
+            >
+              <img
+                src={logoSau(c.logo, c.nume, c.accent)}
+                alt=""
+                width="70"
+                height="44"
+                loading="eager"
+              />
+            </div>
           </li>
         ))}
       </ul>

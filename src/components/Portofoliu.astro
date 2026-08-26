@@ -24,14 +24,12 @@ const inclinari = ["tilt-1", "tilt-2", "tilt-3"];
             class={`nb nb-press group flex h-full flex-col overflow-hidden bg-crem ${inclinari[i % 3]}`}
           >
             <div class={`flex items-center gap-4 border-b-[3px] border-negru ${suprafata[c.accent]} p-5`}>
-              <img
-                src={logoSau(c.logo, c.nume, c.accent)}
-                alt=""
-                width="56"
-                height="56"
-                loading="lazy"
-                class="h-14 w-14 shrink-0 rounded-lg border-[3px] border-negru bg-crem object-contain"
-              />
+              <div
+                class="placa-logo h-14 w-24 shrink-0 border-[3px] border-negru p-2"
+                style={`--fundal: ${c.logoFundal?.trim() || "#101010"}`}
+              >
+                <img src={logoSau(c.logo, c.nume, c.accent)} alt="" width="96" height="56" loading="lazy" />
+              </div>
               <div class="min-w-0">
                 <p class="truncate text-lg font-bold" style="font-family: var(--font-titlu)">{c.nume}</p>
                 <p class={`truncate text-sm font-semibold ${suprafataSecundar[c.accent]}`}>{c.oras}</p>
