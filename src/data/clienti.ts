@@ -287,8 +287,32 @@ export function clientDupaSlug(slug: string): Client | undefined {
   return clienti.find((c) => c.slug === slug);
 }
 
+/**
+ * VITRINA — cei opt clienti afisati pe panoul de pe prima pagina, exact in
+ * ordinea de mai jos. Restul nu dispar: se vad in banda care ruleaza deasupra
+ * si toti, pana la ultimul, in sectiunea Portofoliu.
+ *
+ * Ca sa schimbi vitrina, rescrie slugurile de aici. Un slug scris gresit e
+ * pur si simplu sarit, nu strica pagina.
+ */
+export const sloguriVitrina = [
+  "piano-house",
+  "casa-irlandeza",
+  "pensiunea-belvedere",
+  "pensiunea-la-nasu",
+  "elektro-kasper",
+  "caprice-events",
+  "pensiunea-izora",
+  "scoala-auto-viovas",
+] as const;
+
 /** Clientul urmator din lista, ca vizitatorul sa continue navigarea. */
 export function clientUrmator(slug: string): Client {
   const i = clienti.findIndex((c) => c.slug === slug);
   return clienti[(i + 1) % clienti.length]!;
 }
+
+/** Clientii din vitrina, in ordinea din `sloguriVitrina`. */
+export const clientiVitrina: Client[] = sloguriVitrina
+  .map((slug) => clientDupaSlug(slug))
+  .filter((c): c is Client => c !== undefined);

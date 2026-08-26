@@ -5,17 +5,19 @@
  *  Ordinea de aici e ordinea de pe site.
  *
  *  POZELE stau in src/assets/echipa/. Campul `imagine` e numele
- *  fisierului FARA extensie. Ca sa schimbi o poza, inlocuieste
- *  fisierul pastrand acelasi nume — nu trebuie sa modifici nimic aici.
+ *  fisierului FARA extensie. Ca sa schimbi o poza, pune originalul in
+ *  /Echipa/ si ruleaza `npm run echipa` — scriptul ii scoate fundalul alb
+ *  si il inlocuieste cu cremul site-ului.
  *  Daca `imagine` e "" sau fisierul lipseste, se deseneaza automat
  *  un avatar-substitut, ca sa nu ramana un loc gol.
  * ============================================================
  */
 
 export type Membru = {
-  /** Rolul — asta e titlul cardului. */
+  /** Rolul, scris sub nume. */
   rol: string;
-  /** Numele persoanei. Optional: lasa "" si se afiseaza doar rolul. */
+  /** Numele persoanei — asta e titlul cardului.
+   *  Optional: lasa "" si ramane doar rolul. */
   nume: string;
   /** O singura propozitie, pe intelesul oricui. Fara termeni tehnici. */
   descriere: string;
@@ -29,7 +31,7 @@ export type Membru = {
 export const echipa: Membru[] = [
   {
     rol: "Project Manager",
-    nume: "", // ⚠ pune numele aici daca vrei sa apara
+    nume: "Emanuel",
     descriere:
       "Persoana cu care vorbești de la primul mesaj până la lansare: înțelege ce vrei, ține totul în grafic și îți spune mereu unde suntem.",
     atributii: ["Discuția inițială", "Obiective", "Structura site-ului", "Termene"],
@@ -38,7 +40,7 @@ export const echipa: Membru[] = [
   },
   {
     rol: "UX/UI Designer",
-    nume: "",
+    nume: "Ioana",
     descriere:
       "Decide cum arată site-ul și unde stă fiecare buton, ca vizitatorul să găsească din prima ce caută, fără să se piardă.",
     atributii: ["Aspectul paginilor", "Culori și fonturi", "Identitate vizuală"],
@@ -47,7 +49,7 @@ export const echipa: Membru[] = [
   },
   {
     rol: "Web Developer",
-    nume: "",
+    nume: "Bogdan",
     descriere:
       "Transformă desenul în site care chiar funcționează — la fel de bine pe telefon, pe tabletă și pe calculator.",
     atributii: ["Construcția site-ului", "Funcționalități", "Afișare pe telefon"],
@@ -56,7 +58,7 @@ export const echipa: Membru[] = [
   },
   {
     rol: "Content & Copywriting",
-    nume: "",
+    nume: "Sofia",
     descriere:
       "Scrie textele de pe site, ca omul care intră să înțeleagă din primele secunde ce faci și de ce merită să te aleagă.",
     atributii: ["Textele paginilor", "Descrieri de servicii", "Optimizare pentru Google"],
@@ -65,7 +67,7 @@ export const echipa: Membru[] = [
   },
   {
     rol: "QA & Optimizare",
-    nume: "",
+    nume: "David",
     descriere:
       "Verifică tot site-ul înainte de lansare și se asigură că se încarcă repede și că nimic nu se strică pe niciun telefon.",
     atributii: ["Testare pe dispozitive reale", "Viteză de încărcare", "Verificări finale"],

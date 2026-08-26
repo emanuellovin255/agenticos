@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "logos": "python3 scripts/prep-logos.py"
+    "logos": "python3 scripts/prep-logos.py",
+    "echipa": "python3 scripts/prep-echipa.py"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

@@ -210,6 +210,12 @@ h1, h2, h3, h4 {
   image-rendering: -webkit-optimize-contrast;
 }
 
+/* Pe panoul negru, umbra neagra a butoanelor nu se vede si relieful dispare.
+   O facem crem, ca butonul sa arate la fel de „apasabil" ca pe restul paginii. */
+.nb-pe-negru { box-shadow: 6px 6px 0 var(--color-crem); }
+.nb-pe-negru.nb-press:hover { box-shadow: 9px 9px 0 var(--color-crem); }
+.nb-pe-negru.nb-press:active { box-shadow: 2px 2px 0 var(--color-crem); }
+
 /* ============================================================
    MISCARE
    ============================================================ */

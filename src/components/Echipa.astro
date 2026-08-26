@@ -61,8 +61,8 @@ const inclinari = ["tilt-1", "tilt-2", "tilt-3"];
               />
             )}
 
-            <h3 class="mt-4 text-xl font-bold">{m.rol}</h3>
-            {m.nume && <p class="mt-1 font-semibold text-muted">{m.nume}</p>}
+            <h3 class="mt-5 text-base font-bold">{m.nume || m.rol}</h3>
+            {m.nume && <p class="mt-0.5 text-sm font-semibold text-muted">{m.rol}</p>}
 
             <p class="mt-4 flex-1 text-left text-muted">{m.descriere}</p>
 

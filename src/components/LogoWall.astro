@@ -1,9 +1,13 @@
 ---
-import { clienti } from "../data/clienti";
+import { clienti, clientiVitrina } from "../data/clienti";
 import Icon from "./Icon.astro";
 
-/** Banda ruleaza in bucla: lista se dubleaza ca sa nu apara gol la capat. */
+/** Banda ruleaza in bucla: lista se dubleaza ca sa nu apara gol la capat.
+ *  In banda trec toti clientii; pe grila stau doar cei opt din vitrina. */
 const banda = [...clienti, ...clienti];
+const restul = clienti.length - clientiVitrina.length;
+/** In romana, "de" se pune doar de la 20 in sus: 9 proiecte, dar 24 de proiecte. */
+const restulScris = restul % 100 === 0 || restul % 100 >= 20 ? `${restul} de proiecte` : `${restul} proiecte`;
 
 /** Culoarea placutei din spatele logoului. Cand logoul are fundal
  *  transparent (sau clientul inca nu are logo), placuta ramane in tonul
@@ -38,9 +42,9 @@ const fundal = (c: (typeof clienti)[number]) => c.logoFundal?.trim() || "#101010
     <div class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0b0b0b] to-transparent sm:w-40"></div>
   </div>
 
-  <!-- panoul propriu-zis: toate logourile deodata, navigabile cu tastatura -->
+  <!-- panoul propriu-zis: opt clienti, navigabili cu tastatura -->
   <ul class="relative mx-auto mt-16 grid max-w-6xl grid-cols-2 gap-4 px-4 sm:grid-cols-3 lg:grid-cols-4">
-    {clienti.map((c) => (
+    {clientiVitrina.map((c) => (
       <li class="reveal">
         <a
           href={`/portofoliu/${c.slug}`}
@@ -72,4 +76,20 @@ const fundal = (c: (typeof clienti)[number]) => c.logoFundal?.trim() || "#101010
       </li>
     ))}
   </ul>
+
+  <div class="relative mt-14 px-4 text-center">
+    <a
+      href="/#portofoliu"
+      class="nb nb-press nb-pe-negru inline-flex items-center gap-2.5 bg-galben px-8 py-4 text-lg font-bold text-negru"
+      style="font-family: var(--font-titlu)"
+    >
+      Vezi toate proiectele
+      <Icon nume="sageata" marime={20} />
+    </a>
+    {restul > 0 && (
+      <p class="mt-5 text-sm font-semibold text-crem/60">
+        Încă {restulScris} în portofoliu, fiecare cu povestea lui
+      </p>
+    )}
+  </div>
 </section>

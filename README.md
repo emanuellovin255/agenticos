@@ -41,6 +41,11 @@ Ca să adaugi un client: copiază un bloc `{ ... }`, lipește-l în listă, schi
 
 **`logo` și `logoFundal`** le completează scriptul de logouri, nu tu de mână. Vezi mai jos.
 
+**Pe prima pagină apar doar 8 clienți**, cei din lista `sloguriVitrina` de la finalul
+fișierului, exact în ordinea de acolo. Ceilalți nu dispar: trec prin banda care rulează
+deasupra și apar toți în secțiunea Portofoliu, la care duce butonul „Vezi toate proiectele".
+Ca să schimbi vitrina, rescrie slugurile din listă.
+
 **`linkSite`** e câmpul pe care îl completezi la final. Cât timp e `""`, butonul afișează
 „Site-ul se publică în curând" și nu duce nicăieri — nu rămâne niciun link rupt.
 Când pui adresa, butonul devine activ singur.
@@ -80,9 +85,10 @@ unde sunt scrise explicit.
 ### 5. Echipa — `src/data/echipa.ts`
 
 Cele cinci roluri sunt deja scrise, în ordinea în care apar pe site. Titlul cardului e
-**rolul**; câmpul `nume` e opțional — dacă îl lași `""`, se afișează doar rolul.
+**numele**, iar sub el, mai mic, stă rolul. Dacă lași `nume` gol (`""`), rămâne doar rolul.
 
-`imagine` e numele fișierului din `src/assets/echipa/`, fără extensie.
+`imagine` e numele fișierului din `src/assets/echipa/`, fără extensie. Vezi mai jos cum se
+pregătesc pozele.
 
 ### 6. Imaginile
 
@@ -91,8 +97,26 @@ Pune fișierele în folderele de mai jos și scrie calea în fișierul de date c
 imagine lipsă nu lasă un pătrat gol.
 
 **Pozele echipei sunt excepția**: stau în `src/assets/echipa/`, nu în `public/`. Acolo Astro
-le optimizează la build — le-a dus de la ~4 MB la ~100 KB în total, trecându-le pe webp. Ca să
-schimbi o poză, înlocuiește fișierul păstrând același nume și gata.
+le optimizează la build — le-a dus de la ~4 MB la ~100 KB în total, trecându-le pe webp.
+
+#### Pozele echipei
+
+Originalele stau în `/Echipa/`, portrete rotunde pe fundal alb. Albul ăla **nu** e același cu
+cremul site-ului, așa că lăsat așa se vede un pătrat mai deschis în jurul portretului. Rulezi:
+
+```bash
+npm run echipa
+```
+
+Scriptul găsește fundalul (doar albul lipit de marginea pozei, ca să nu atingă albul din
+haine), îl vopsește exact în cremul cardului, taie poza fix pe cerc și o salvează în
+`src/assets/echipa/`. Portretul în sine nu e atins.
+
+Ca să schimbi o poză: pune originalul în `/Echipa/` cu același nume și rulează scriptul din
+nou. Dacă îi schimbi numele fișierului, adaugă-l în tabelul `HARTA` din `scripts/prep-echipa.py`.
+
+**Dacă schimbi cremul** din `src/styles/global.css`, schimbă-l și în `CREM` la începutul
+scriptului și rulează-l din nou — altfel fundalul pozelor rămâne pe culoarea veche.
 
 #### Logourile clienților
 
