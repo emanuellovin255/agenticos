@@ -1,0 +1,83 @@
+---
+import { site } from "../data/site";
+import { clienti } from "../data/clienti";
+import WhatsAppButton from "./WhatsAppButton.astro";
+import Icon from "./Icon.astro";
+import { logoSau } from "../lib/placeholder";
+
+const primele = clienti.slice(0, 5);
+---
+<section class="relative overflow-hidden px-4 pt-14 pb-20 sm:pt-20">
+  <!-- forme decorative -->
+  <div class="pointer-events-none absolute -top-10 -right-16 hidden h-56 w-56 rotate-12 rounded-full border-[4px] border-negru bg-galben/45 lg:block" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute top-52 -left-20 hidden h-40 w-40 rotate-6 border-[4px] border-negru bg-violet/25 lg:block" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-4xl text-center">
+    <p class="nb-mic mx-auto mb-7 inline-flex items-center gap-2 bg-galben px-4 py-2 text-sm font-bold">
+      <Icon nume="fulger" marime={17} />
+      Site-uri pentru afaceri din România
+    </p>
+
+    <h1 class="text-[2.4rem] leading-[1.03] font-bold sm:text-6xl lg:text-7xl">
+      Site-ul tău ar trebui să-ți <span class="marcat">aducă clienți</span>, nu doar să existe.
+    </h1>
+
+    <p class="mx-auto mt-7 max-w-2xl text-lg text-muted sm:text-xl">
+      Construim site-uri rapide, clare și gândite pentru un singur lucru: ca omul care intră
+      să ajungă să-ți scrie. Fără termeni tehnici, fără surprize la final.
+    </p>
+
+    <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <WhatsAppButton marime="mare" />
+      <a
+        href="#portofoliu"
+        class="nb nb-press inline-flex items-center gap-2 bg-crem px-7 py-5 text-lg font-bold"
+        style="font-family: var(--font-titlu)"
+      >
+        Vezi lucrările <Icon nume="sageata" marime={20} />
+      </a>
+    </div>
+
+    <!-- bara de incredere -->
+    <div class="mt-14 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+      <div class="text-center">
+        <p class="text-4xl font-bold" style="font-family: var(--font-titlu)">{site.cifre.siteuriLivrate}+</p>
+        <p class="text-sm font-semibold text-muted">site-uri livrate</p>
+      </div>
+      <div class="h-11 w-[3px] bg-negru/20" aria-hidden="true"></div>
+      <div class="text-center">
+        <p class="text-4xl font-bold" style="font-family: var(--font-titlu)">{site.cifre.aniExperienta}</p>
+        <p class="text-sm font-semibold text-muted">ani de experiență</p>
+      </div>
+      <div class="h-11 w-[3px] bg-negru/20" aria-hidden="true"></div>
+      <div class="text-center">
+        <p class="text-4xl font-bold" style="font-family: var(--font-titlu)">{site.cifre.timpMediuLivrare}</p>
+        <p class="text-sm font-semibold text-muted">timp mediu de livrare</p>
+      </div>
+    </div>
+
+    <!-- fete clienti + rating -->
+    <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <ul class="flex -space-x-3">
+        {primele.map((c) => (
+          <li>
+            <img
+              src={logoSau(c.logo, c.nume, c.accent)}
+              alt=""
+              width="44"
+              height="44"
+              loading="eager"
+              class="h-11 w-11 rounded-full border-[3px] border-negru bg-crem object-cover"
+            />
+          </li>
+        ))}
+      </ul>
+      <p class="flex items-center gap-1.5 text-sm font-semibold text-muted">
+        <span class="flex text-coral" aria-hidden="true">
+          {[1, 2, 3, 4, 5].map(() => <Icon nume="stea" marime={17} />)}
+        </span>
+        au ales deja să lucreze cu noi
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+---
+import Icon from "./Icon.astro";
+import { linkWhatsApp } from "../lib/whatsapp";
+---
+<a
+  href={linkWhatsApp()}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="nb nb-press fixed bottom-4 right-4 z-50 inline-flex items-center gap-2.5 bg-coral px-5 py-3.5 font-bold text-negru md:bottom-6 md:right-6"
+  style="font-family: var(--font-titlu)"
+  aria-label="Cere ofertă personalizată pe WhatsApp"
+>
+  <Icon nume="whatsapp" marime={24} />
+  <span class="hidden sm:inline">Cere ofertă</span>
+</a>

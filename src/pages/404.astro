@@ -1,0 +1,22 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+---
+<Base titlu="Pagina nu există" descriere="Pagina căutată nu a fost găsită.">
+  <section class="grid min-h-[62vh] place-items-center px-4 py-20">
+    <div class="nb-gros reveal max-w-lg bg-galben p-10 text-center">
+      <p class="text-7xl font-bold" style="font-family: var(--font-titlu)">404</p>
+      <h1 class="mt-4 text-2xl font-bold">Aici nu e nimic</h1>
+      <p class="mt-3 text-negru/75">
+        Pagina pe care o cauți a fost mutată sau nu a existat niciodată. Se mai întâmplă.
+      </p>
+      <a
+        href="/"
+        class="nb nb-press mt-8 inline-flex items-center gap-2 bg-crem px-6 py-3.5 font-bold"
+        style="font-family: var(--font-titlu)"
+      >
+        Înapoi la prima pagină <Icon nume="sageata" marime={19} />
+      </a>
+    </div>
+  </section>
+</Base>

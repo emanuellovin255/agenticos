@@ -1,0 +1,85 @@
+---
+import { site } from "../data/site";
+import WhatsAppButton from "./WhatsAppButton.astro";
+import Icon from "./Icon.astro";
+
+const linkuri = [
+  { text: "Servicii", href: "/#servicii" },
+  { text: "Portofoliu", href: "/#portofoliu" },
+  { text: "Testimoniale", href: "/#testimoniale" },
+  { text: "Echipa", href: "/#echipa" },
+  { text: "Întrebări", href: "/#intrebari" },
+];
+---
+<header class="sticky top-0 z-50 border-b-[3px] border-negru bg-crem/95 backdrop-blur">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3" aria-label="Navigare principală">
+    <a href="/" class="flex shrink-0 items-center gap-2.5 font-bold" style="font-family: var(--font-titlu)">
+      <span class="nb-mic grid h-11 w-11 place-items-center bg-galben text-xl font-bold" aria-hidden="true">
+        {site.nume.trim().charAt(0).toUpperCase()}
+      </span>
+      <span class="text-lg leading-tight sm:text-xl">{site.nume}</span>
+    </a>
+
+    <ul class="hidden items-center gap-7 lg:flex">
+      {linkuri.map((l) => (
+        <li>
+          <a href={l.href} class="font-semibold decoration-[3px] underline-offset-[6px] hover:underline">
+            {l.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="hidden shrink-0 md:block">
+      <WhatsAppButton eticheta="Cere ofertă" />
+    </div>
+
+    <button
+      type="button"
+      id="buton-meniu"
+      class="nb-mic grid h-11 w-11 shrink-0 place-items-center bg-galben lg:hidden"
+      aria-label="Deschide meniul"
+      aria-expanded="false"
+      aria-controls="meniu-mobil"
+    >
+      <Icon nume="meniu" marime={22} />
+    </button>
+  </nav>
+
+  <div id="meniu-mobil" class="hidden border-t-[3px] border-negru bg-crem lg:hidden">
+    <ul class="mx-auto max-w-6xl px-4 py-3">
+      {linkuri.map((l) => (
+        <li class="border-b-2 border-negru/15 last:border-0">
+          <a href={l.href} class="block py-3.5 text-lg font-semibold">{l.text}</a>
+        </li>
+      ))}
+      <li class="pt-4 pb-2 md:hidden">
+        <WhatsAppButton class="w-full" />
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  function pornesteMeniu() {
+    const buton = document.getElementById("buton-meniu");
+    const meniu = document.getElementById("meniu-mobil");
+    if (!buton || !meniu) return;
+
+    buton.addEventListener("click", () => {
+      const deschis = meniu.classList.toggle("hidden") === false;
+      buton.setAttribute("aria-expanded", String(deschis));
+      buton.setAttribute("aria-label", deschis ? "Închide meniul" : "Deschide meniul");
+    });
+
+    meniu.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => {
+        meniu.classList.add("hidden");
+        buton.setAttribute("aria-expanded", "false");
+      }),
+    );
+  }
+
+  pornesteMeniu();
+  document.addEventListener("astro:page-load", pornesteMeniu);
+</script>

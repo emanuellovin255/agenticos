@@ -1,0 +1,56 @@
+---
+import { faq } from "../data/faq";
+import Icon from "./Icon.astro";
+import WhatsAppButton from "./WhatsAppButton.astro";
+
+/** Datele structurate ajuta intrebarile sa apara direct in Google. */
+const dateFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.intrebare,
+    acceptedAnswer: { "@type": "Answer", text: f.raspuns },
+  })),
+};
+---
+<section id="intrebari" class="scroll-mt-24 px-4 py-20">
+  <div class="mx-auto max-w-3xl">
+    <div class="reveal text-center">
+      <p class="nb-mic mb-5 inline-block bg-violet-d px-3.5 py-1.5 text-sm font-bold text-white">Întrebări frecvente</p>
+      <h2 class="text-3xl font-bold sm:text-5xl">Ce ne întreabă toată lumea</h2>
+    </div>
+
+    <div class="mt-12 space-y-4">
+      {faq.map((f) => (
+        <details class="nb reveal group bg-crem">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-lg font-bold">
+            <span style="font-family: var(--font-titlu)">{f.intrebare}</span>
+            <span
+              class="nb-mic grid h-9 w-9 shrink-0 place-items-center bg-galben transition-transform duration-200 group-open:rotate-45"
+              aria-hidden="true"
+            >
+              <Icon nume="plus" marime={18} />
+            </span>
+          </summary>
+          <p class="border-t-[3px] border-negru p-5 text-muted">{f.raspuns}</p>
+        </details>
+      ))}
+    </div>
+
+    <div class="reveal mt-12 text-center">
+      <p class="text-lg font-semibold">Ai altă întrebare?</p>
+      <p class="mt-1 text-muted">Scrie-ne direct, răspundem de obicei în aceeași zi.</p>
+      <div class="mt-6 flex justify-center">
+        <WhatsAppButton eticheta="Întreabă pe WhatsApp" />
+      </div>
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(dateFaq)} />
+</section>
+
+<style>
+  /* Ascunde triunghiul implicit din Safari */
+  summary::-webkit-details-marker { display: none; }
+</style>

@@ -1,0 +1,41 @@
+---
+import WhatsAppButton from "./WhatsAppButton.astro";
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+
+interface Props {
+  titlu?: string;
+  subtitlu?: string;
+  mesaj?: string;
+}
+
+const {
+  titlu = "Hai să vorbim despre site-ul tău",
+  subtitlu = "Îmi spui ce faci, îți spun ce se poate face. Prima discuție e gratuită și nu te obligă la nimic.",
+  mesaj,
+} = Astro.props;
+---
+<section class="px-4 py-20">
+  <div class="nb-gros reveal relative mx-auto max-w-4xl overflow-hidden bg-galben px-6 py-16 text-center sm:px-12">
+    <div class="pointer-events-none absolute -top-12 -left-12 h-44 w-44 rounded-full border-[4px] border-negru/15" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -right-14 -bottom-14 h-52 w-52 rotate-12 border-[4px] border-negru/15" aria-hidden="true"></div>
+
+    <div class="relative">
+      <span class="nb-mic mb-6 inline-flex items-center gap-2 bg-crem px-3.5 py-1.5 text-sm font-bold">
+        <Icon nume="fulger" marime={16} />
+        Răspundem de obicei în aceeași zi
+      </span>
+
+      <h2 class="text-3xl font-bold sm:text-5xl">{titlu}</h2>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-negru/75">{subtitlu}</p>
+
+      <div class="mt-9 flex justify-center">
+        <WhatsAppButton marime="mare" mesaj={mesaj} />
+      </div>
+
+      <p class="mt-6 text-sm font-semibold text-negru/60">
+        Sau scrie-ne pe <a class="underline decoration-[3px] underline-offset-4" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+  </div>
+</section>

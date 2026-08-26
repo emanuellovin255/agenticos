@@ -1,0 +1,88 @@
+---
+import Icon from "./Icon.astro";
+import type { Video } from "../data/testimoniale";
+
+interface Props { video: Video; titlu: string }
+const { video, titlu } = Astro.props;
+
+/**
+ * Facade: pana la click se afiseaza doar posterul (~30-80 KB).
+ * Fisierul video sau iframe-ul se incarca abia cand vizitatorul apasa play,
+ * altfel fiecare testimonial ar trage megabytes la deschiderea paginii.
+ */
+const raport = video.format === "vertical" ? "aspect-[9/16]" : "aspect-video";
+
+const sursaIncarcare =
+  video.tip === "youtube"
+    ? `https://www.youtube-nocookie.com/embed/${video.sursa}?autoplay=1&rel=0`
+    : video.tip === "vimeo"
+      ? `https://player.vimeo.com/video/${video.sursa}?autoplay=1`
+      : video.sursa;
+---
+<div
+  class={`video-facade relative w-full overflow-hidden rounded-[11px] bg-negru ${raport}`}
+  data-tip={video.tip}
+  data-sursa={sursaIncarcare}
+  data-titlu={titlu}
+>
+  {video.poster && (
+    <img
+      src={video.poster}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+  )}
+
+  <button
+    type="button"
+    class="butonul-play group absolute inset-0 grid place-items-center bg-negru/25 transition hover:bg-negru/10"
+    aria-label={`Redă testimonialul video: ${titlu}`}
+  >
+    <span
+      class="nb grid h-[74px] w-[74px] place-items-center rounded-full bg-coral pl-1.5 text-negru transition-transform duration-200 group-hover:scale-110"
+    >
+      <Icon nume="play" marime={32} />
+    </span>
+  </button>
+</div>
+
+<script>
+  function pornesteVideo() {
+    document.querySelectorAll<HTMLElement>(".video-facade").forEach((cadru) => {
+      const buton = cadru.querySelector<HTMLButtonElement>(".butonul-play");
+      if (!buton || cadru.dataset.pornit === "da") return;
+      cadru.dataset.pornit = "da";
+
+      buton.addEventListener("click", () => {
+        const { tip, sursa, titlu } = cadru.dataset;
+        if (!sursa) return;
+
+        if (tip === "fisier") {
+          const video = document.createElement("video");
+          video.src = sursa;
+          video.controls = true;
+          video.autoplay = true;
+          video.playsInline = true;
+          video.className = "absolute inset-0 h-full w-full object-cover";
+          cadru.replaceChildren(video);
+          video.play().catch(() => {
+            /* browserul poate refuza pornirea automata — comenzile raman vizibile */
+          });
+        } else {
+          const iframe = document.createElement("iframe");
+          iframe.src = sursa;
+          iframe.title = titlu ?? "Testimonial video";
+          iframe.allow = "accelerometer; autoplay; encrypted-media; picture-in-picture";
+          iframe.allowFullscreen = true;
+          iframe.className = "absolute inset-0 h-full w-full border-0";
+          cadru.replaceChildren(iframe);
+        }
+      });
+    });
+  }
+
+  pornesteVideo();
+  document.addEventListener("astro:page-load", pornesteVideo);
+</script>

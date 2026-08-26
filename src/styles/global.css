@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TOKENI — sistemul de design Neo-Brutalist Cartoon
+   Contrastele au fost calculate, nu ghicite. Vezi regulile de mai jos.
+   ============================================================ */
+@theme {
+  --color-crem: #fff8e7;
+  --color-crem-adanc: #f7ecd2;
+  --color-negru: #111111;
+  --color-galben: #ffd84d;
+  --color-coral: #ff5c39;
+  --color-violet: #7c5cff;
+  --color-violet-d: #6b46e8; /* varianta pentru text ALB deasupra */
+  --color-muted: #5a5248;
+
+  /* Fonturile vin auto-gazduite din astro.config.mjs */
+  --font-titlu: var(--font-titlu-astro), "Trebuchet MS", Verdana, sans-serif;
+  --font-text: var(--font-text-astro), "Segoe UI", Helvetica, sans-serif;
+
+  --radius-nb: 14px;
+}
+
+/* ------------------------------------------------------------
+   REGULI DE CONTRAST — nu le incalca:
+     negru pe crem ....... 17.83:1  ✓
+     negru pe galben ..... 13.65:1  ✓
+     negru pe coral ......  6.15:1  ✓
+     ALB pe coral ........  3.07:1  ✗ INTERZIS pentru text
+     ALB pe violet .......  4.35:1  ✗ sub prag -> foloseste violet-d
+     alb pe violet-d .....  5.73:1  ✓
+   Pe coral si galben se scrie cu NEGRU. Violetul deschis ramane
+   decorativ (contur, umbra, fundal fara text).
+   ------------------------------------------------------------ */
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-crem);
+  color: var(--color-negru);
+  font-family: var(--font-text);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-titlu);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+/* Fundal cu puncte, discret, in stil caiet de desen */
+.fundal-puncte {
+  background-image: radial-gradient(circle at 1px 1px, rgba(17, 17, 17, 0.13) 1.5px, transparent 0);
+  background-size: 22px 22px;
+}
+
+/* ============================================================
+   PRIMITIVE NEO-BRUTALIST
+   ============================================================ */
+
+/* Card cu contur gros si umbra solida (fara blur) */
+.nb {
+  border: 3px solid var(--color-negru);
+  border-radius: var(--radius-nb);
+  box-shadow: 6px 6px 0 var(--color-negru);
+}
+
+.nb-gros {
+  border-width: 4px;
+  box-shadow: 8px 8px 0 var(--color-negru);
+}
+
+.nb-mic {
+  border: 3px solid var(--color-negru);
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 var(--color-negru);
+}
+
+/* Apasare mecanica — cardul se ridica la hover si se infunda la click */
+.nb-press {
+  transition: transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 160ms ease;
+}
+.nb-press:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 9px 9px 0 var(--color-negru);
+}
+.nb-press:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--color-negru);
+}
+
+/* Inclinari alternante — aspect de sticker lipit pe pagina */
+.tilt-1 { transform: rotate(-1.6deg); }
+.tilt-2 { transform: rotate(1.4deg); }
+.tilt-3 { transform: rotate(-0.9deg); }
+.tilt-1:hover, .tilt-2:hover, .tilt-3:hover { transform: rotate(0deg) translate(-2px, -2px); }
+
+/* Text subliniat cu o dunga groasa de marker */
+.marcat {
+  background-image: linear-gradient(transparent 58%, var(--color-galben) 58%, var(--color-galben) 92%, transparent 92%);
+  padding-inline: 0.08em;
+}
+
+/* Focus vizibil, obligatoriu pentru navigarea cu tastatura */
+:where(a, button, [tabindex], summary, input, textarea):focus-visible {
+  outline: 4px solid var(--color-violet-d);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ============================================================
+   MISCARE
+   ============================================================ */
+
+/* Aparitie la scroll — clasa .vizibil e pusa de IntersectionObserver.
+   Ascunderea e conditionata de `html.js-reveal`, pus de un script inline din
+   <head>. Daca JS-ul e oprit, intarzie sau crapa, textul ramane vizibil —
+   continutul nu depinde niciodata de JavaScript ca sa poata fi citit. */
+html.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 520ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+html.js-reveal .reveal.vizibil {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Banda de logouri, in bucla continua */
+@keyframes ruleaza {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.banda {
+  animation: ruleaza 42s linear infinite;
+  will-change: transform;
+}
+.banda-container:hover .banda {
+  animation-play-state: paused;
+}
+
+@keyframes plutire {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-11px) rotate(2deg); }
+}
+.pluteste { animation: plutire 5.5s ease-in-out infinite; }
+
+/* Respecta setarea de sistem pentru miscare redusa */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .banda { animation: none; }
+}

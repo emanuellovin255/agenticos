@@ -1,0 +1,11 @@
+dist/
+node_modules/
+.astro/
+.DS_Store
+*.log
+.env
+.env.production
+
+# Videoclipurile originale — copiile folosite de site sunt in public/testimoniale/,
+# nu are rost sa urcam de doua ori aceleasi 16 MB.
+/Testimoniale/

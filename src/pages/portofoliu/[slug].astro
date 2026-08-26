@@ -1,0 +1,147 @@
+---
+import Base from "../../layouts/Base.astro";
+import CtaFinal from "../../components/CtaFinal.astro";
+import Icon from "../../components/Icon.astro";
+import { clienti, clientUrmator, type Client } from "../../data/clienti";
+import { logoSau, screenshotSau } from "../../lib/placeholder";
+import { mesajPentruClient } from "../../lib/whatsapp";
+
+/** O pagina statica pentru fiecare client din clienti.ts. */
+export function getStaticPaths() {
+  return clienti.map((client) => ({
+    params: { slug: client.slug },
+    props: { client },
+  }));
+}
+
+interface Props { client: Client }
+const { client } = Astro.props;
+const urmator = clientUrmator(client.slug);
+
+import { suprafata } from "../../lib/accent";
+
+/** Cat timp linkul nu e completat, butonul nu duce nicaieri — dar nici nu se strica. */
+const areLink = client.linkSite.trim() !== "";
+---
+<Base titlu={`${client.nume} — ${client.oras}`} descriere={client.descriere.slice(0, 155)}>
+  <article class="px-4 py-12">
+    <div class="mx-auto max-w-4xl">
+      <a href="/#portofoliu" class="inline-flex items-center gap-2 font-semibold hover:underline">
+        <span class="inline-block rotate-180"><Icon nume="sageata" marime={18} /></span>
+        Înapoi la portofoliu
+      </a>
+
+      <header class={`nb-gros mt-7 flex flex-col items-center gap-6 ${suprafata[client.accent]} p-8 text-center sm:flex-row sm:text-left`}>
+        <img
+          src={logoSau(client.logo, client.nume, client.accent)}
+          alt={`Logo ${client.nume}`}
+          width="112"
+          height="112"
+          class="h-28 w-28 shrink-0 rounded-xl border-[4px] border-negru bg-crem object-contain"
+        />
+        <div class="min-w-0">
+          <h1 class="text-3xl font-bold sm:text-5xl">{client.nume}</h1>
+          <p class="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
+            <span class="nb-mic bg-crem px-3 py-1 text-sm font-bold text-negru">{client.oras}</span>
+            <span class="nb-mic bg-crem px-3 py-1 text-sm font-bold text-negru">{client.categorie}</span>
+          </p>
+        </div>
+      </header>
+
+      <section class="reveal mt-10">
+        <h2 class="text-2xl font-bold">Despre locație</h2>
+        <p class="mt-4 text-lg text-muted">{client.descriere}</p>
+      </section>
+
+      {(client.provocare || client.rezultat) && (
+        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+          {client.provocare && (
+            <section class="nb reveal bg-crem p-6">
+              <h2 class="flex items-center gap-2 text-lg font-bold">
+                <span class="nb-mic grid h-9 w-9 place-items-center bg-coral"><Icon nume="lupa" marime={18} /></span>
+                Provocarea
+              </h2>
+              <p class="mt-4 text-muted">{client.provocare}</p>
+            </section>
+          )}
+          {client.rezultat && (
+            <section class="nb reveal bg-crem p-6">
+              <h2 class="flex items-center gap-2 text-lg font-bold">
+                <span class="nb-mic grid h-9 w-9 place-items-center bg-galben"><Icon nume="fulger" marime={18} /></span>
+                Rezultatul
+              </h2>
+              <p class="mt-4 text-muted">{client.rezultat}</p>
+            </section>
+          )}
+        </div>
+      )}
+
+      {client.livrabile && client.livrabile.length > 0 && (
+        <section class="reveal mt-10">
+          <h2 class="text-2xl font-bold">Ce am livrat</h2>
+          <ul class="mt-4 flex flex-wrap gap-3">
+            {client.livrabile.map((l) => (
+              <li class="nb-mic flex items-center gap-2 bg-crem px-3.5 py-2 font-semibold">
+                <span class="text-coral"><Icon nume="check" marime={17} /></span>
+                {l}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <section class="reveal mt-10">
+        <img
+          src={screenshotSau(client.screenshot, client.nume, client.accent)}
+          alt={`Captură din site-ul ${client.nume}`}
+          width="800"
+          height="500"
+          loading="lazy"
+          class="nb w-full bg-crem"
+        />
+      </section>
+
+      <section class="reveal mt-10 text-center">
+        {areLink ? (
+          <a
+            href={client.linkSite}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="nb nb-press inline-flex items-center gap-2.5 bg-negru px-8 py-5 text-lg font-bold text-crem"
+            style="font-family: var(--font-titlu)"
+          >
+            Vezi site-ul
+            <Icon nume="sageata" marime={21} />
+          </a>
+        ) : (
+          <span
+            class="nb-mic inline-flex cursor-not-allowed items-center gap-2.5 bg-crem-adanc px-8 py-5 text-lg font-bold text-muted"
+            style="font-family: var(--font-titlu)"
+            aria-disabled="true"
+          >
+            Site-ul se publică în curând
+          </span>
+        )}
+      </section>
+    </div>
+  </article>
+
+  <CtaFinal
+    titlu="Vrei ceva asemănător pentru afacerea ta?"
+    subtitlu="Spune-ne ce faci și îți arătăm cum ar arăta site-ul tău. Prima discuție e gratuită."
+    mesaj={mesajPentruClient(client.nume)}
+  />
+
+  <section class="px-4 pb-20">
+    <a
+      href={`/portofoliu/${urmator.slug}`}
+      class="nb nb-press mx-auto flex max-w-4xl items-center justify-between gap-5 bg-crem p-6"
+    >
+      <div class="min-w-0">
+        <p class="text-sm font-semibold text-muted">Proiectul următor</p>
+        <p class="truncate text-xl font-bold" style="font-family: var(--font-titlu)">{urmator.nume}</p>
+      </div>
+      <span class="nb-mic grid h-12 w-12 shrink-0 place-items-center bg-galben"><Icon nume="sageata" marime={22} /></span>
+    </a>
+  </section>
+</Base>

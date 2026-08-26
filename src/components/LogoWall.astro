@@ -1,0 +1,56 @@
+---
+import { clienti } from "../data/clienti";
+import { logoSau } from "../lib/placeholder";
+import Icon from "./Icon.astro";
+
+/** Banda ruleaza in bucla: lista se dubleaza ca sa nu apara gol la capat. */
+const banda = [...clienti, ...clienti];
+---
+<section class="border-y-[4px] border-negru bg-galben py-12" aria-labelledby="titlu-logouri">
+  <div class="mx-auto max-w-6xl px-4 text-center">
+    <h2 id="titlu-logouri" class="text-2xl font-bold sm:text-3xl">
+      Ei au deja site de la noi
+    </h2>
+    <p class="mt-2 font-semibold text-negru/70">Apasă pe oricare ca să vezi povestea din spate</p>
+  </div>
+
+  <!-- banda in miscare, doar decor -->
+  <div class="banda-container relative mt-10 overflow-hidden" aria-hidden="true">
+    <div class="banda flex w-max gap-5">
+      {banda.map((c) => (
+        <div class="nb-mic flex shrink-0 items-center gap-3 bg-crem px-5 py-3">
+          <img src={logoSau(c.logo, c.nume, c.accent)} alt="" width="36" height="36" class="h-9 w-9 rounded-md object-contain" />
+          <span class="text-base font-bold whitespace-nowrap" style="font-family: var(--font-titlu)">{c.nume}</span>
+        </div>
+      ))}
+    </div>
+    <div class="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-galben to-transparent"></div>
+    <div class="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-galben to-transparent"></div>
+  </div>
+
+  <!-- grila reala, navigabila cu tastatura -->
+  <ul class="mx-auto mt-10 grid max-w-6xl grid-cols-2 gap-4 px-4 sm:grid-cols-3 lg:grid-cols-6">
+    {clienti.map((c) => (
+      <li class="reveal">
+        <a
+          href={`/portofoliu/${c.slug}`}
+          class="nb nb-press group flex h-full flex-col items-center gap-2.5 bg-crem px-3 py-5 text-center"
+        >
+          <img
+            src={logoSau(c.logo, c.nume, c.accent)}
+            alt={`Logo ${c.nume}`}
+            width="60"
+            height="60"
+            loading="lazy"
+            class="h-15 w-15 rounded-lg object-contain"
+          />
+          <span class="text-sm leading-tight font-bold" style="font-family: var(--font-titlu)">{c.nume}</span>
+          <span class="text-xs font-semibold text-muted">{c.oras}</span>
+          <span class="mt-auto pt-2 text-coral opacity-0 transition group-hover:opacity-100">
+            <Icon nume="sageata" marime={18} />
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

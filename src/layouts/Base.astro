@@ -1,0 +1,125 @@
+---
+import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
+
+import { site } from "../data/site";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import StickyWhatsApp from "../components/StickyWhatsApp.astro";
+
+interface Props {
+  titlu: string;
+  descriere: string;
+  /** Imaginea de previzualizare la partajare pe retele sociale. */
+  imagine?: string;
+}
+
+const { titlu, descriere, imagine = "/og-default.png" } = Astro.props;
+
+const titluComplet = titlu === site.nume ? `${site.nume} — ${site.tagline}` : `${titlu} | ${site.nume}`;
+const canonic = new URL(Astro.url.pathname, Astro.site ?? site.url).toString();
+const ogUrl = new URL(imagine, Astro.site ?? site.url).toString();
+
+const dateStructurate = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: site.nume,
+  description: site.tagline,
+  url: site.url,
+  email: site.email,
+  telephone: `+${site.whatsapp}`,
+  address: { "@type": "PostalAddress", addressLocality: site.oras, addressCountry: "RO" },
+  areaServed: "RO",
+  priceRange: "$$",
+  knowsLanguage: "ro-RO",
+};
+---
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titluComplet}</title>
+    <meta name="description" content={descriere} />
+    <link rel="canonical" href={canonic} />
+
+    <Font cssVariable="--font-titlu-astro" preload />
+    <Font cssVariable="--font-text-astro" preload />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:site_name" content={site.nume} />
+    <meta property="og:title" content={titluComplet} />
+    <meta property="og:description" content={descriere} />
+    <meta property="og:url" content={canonic} />
+    <meta property="og:image" content={ogUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#FFF8E7" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(dateStructurate)} />
+
+    <!-- Activeaza aparitia la scroll doar daca JS-ul chiar ruleaza si
+         utilizatorul nu a cerut miscare redusa. Ruleaza inainte de randare,
+         deci nu apare nicio palpaire. -->
+    <script is:inline>
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("js-reveal");
+      }
+    </script>
+
+    <ClientRouter />
+  </head>
+
+  <body class="fundal-puncte antialiased">
+    <a
+      href="#continut"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:nb focus:bg-galben focus:px-5 focus:py-3 focus:font-bold"
+    >
+      Sari la conținut
+    </a>
+
+    <Nav />
+
+    <main id="continut">
+      <slot />
+    </main>
+
+    <Footer />
+    <StickyWhatsApp />
+
+    <script>
+      // Aparitie la scroll. Ruleaza si dupa navigarea intre pagini (ClientRouter).
+      function pornesteReveal() {
+        const elemente = document.querySelectorAll<HTMLElement>(".reveal:not(.vizibil)");
+        if (!elemente.length) return;
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          elemente.forEach((el) => el.classList.add("vizibil"));
+          return;
+        }
+
+        const observator = new IntersectionObserver(
+          (intrari) => {
+            intrari.forEach((intrare, i) => {
+              if (!intrare.isIntersecting) return;
+              const el = intrare.target as HTMLElement;
+              el.style.transitionDelay = `${Math.min(i * 70, 350)}ms`;
+              el.classList.add("vizibil");
+              observator.unobserve(el);
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+        );
+
+        elemente.forEach((el) => observator.observe(el));
+      }
+
+      pornesteReveal();
+      document.addEventListener("astro:page-load", pornesteReveal);
+    </script>
+  </body>
+</html>

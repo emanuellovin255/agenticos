@@ -1,0 +1,80 @@
+---
+import { testimonialeVideo, testimonialeText } from "../data/testimoniale";
+import VideoTestimonial from "./VideoTestimonial.astro";
+import Icon from "./Icon.astro";
+import { avatarPlaceholder } from "../lib/placeholder";
+---
+<section id="testimoniale" class="scroll-mt-24 px-4 py-20">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal max-w-2xl">
+      <p class="nb-mic mb-5 inline-block bg-galben px-3.5 py-1.5 text-sm font-bold">Testimoniale</p>
+      <h2 class="text-3xl font-bold sm:text-5xl">Ce spun oamenii cu care am lucrat</h2>
+      <p class="mt-5 text-lg text-muted">
+        Fără actori și fără citate inventate. Sunt clienții noștri, filmați pe telefonul lor.
+      </p>
+    </div>
+
+    {testimonialeVideo.length > 0 && (
+      <ul class="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        {testimonialeVideo.map((t) => (
+          <li class="nb reveal flex flex-col overflow-hidden bg-crem">
+            <VideoTestimonial video={t.video!} titlu={`${t.nume} — ${t.client}`} />
+
+            <div class="flex flex-1 flex-col border-t-[3px] border-negru p-5">
+              {t.rating && (
+                <span class="mb-3 flex gap-0.5 text-coral" aria-label={`Notă ${t.rating} din 5`}>
+                  {Array.from({ length: t.rating }).map(() => <Icon nume="stea" marime={18} />)}
+                </span>
+              )}
+              <p class="flex-1 text-muted">„{t.text}”</p>
+              <div class="mt-5 flex items-center gap-3 border-t-2 border-negru/10 pt-4">
+                <img
+                  src={t.poza && t.poza !== "" ? t.poza : avatarPlaceholder(t.nume, "violet")}
+                  alt=""
+                  width="44"
+                  height="44"
+                  loading="lazy"
+                  class="h-11 w-11 rounded-full border-[3px] border-negru object-cover"
+                />
+                <div class="min-w-0">
+                  <p class="truncate font-bold" style="font-family: var(--font-titlu)">{t.nume}</p>
+                  <p class="truncate text-sm text-muted">{t.rol} · {t.client}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {testimonialeText.length > 0 && (
+      <ul class="mt-8 grid gap-7 md:grid-cols-2">
+        {testimonialeText.map((t, i) => (
+          <li class={`nb nb-press reveal flex flex-col bg-crem p-7 ${i % 2 === 0 ? "tilt-3" : "tilt-2"}`}>
+            <span class="text-6xl leading-none font-bold text-galben" style="font-family: var(--font-titlu)" aria-hidden="true">„</span>
+            {t.rating && (
+              <span class="mt-1 mb-3 flex gap-0.5 text-coral" aria-label={`Notă ${t.rating} din 5`}>
+                {Array.from({ length: t.rating }).map(() => <Icon nume="stea" marime={18} />)}
+              </span>
+            )}
+            <p class="flex-1 text-lg text-muted">{t.text}</p>
+            <div class="mt-6 flex items-center gap-3 border-t-2 border-negru/10 pt-4">
+              <img
+                src={t.poza && t.poza !== "" ? t.poza : avatarPlaceholder(t.nume, "coral")}
+                alt=""
+                width="48"
+                height="48"
+                loading="lazy"
+                class="h-12 w-12 rounded-full border-[3px] border-negru object-cover"
+              />
+              <div class="min-w-0">
+                <p class="truncate font-bold" style="font-family: var(--font-titlu)">{t.nume}</p>
+                <p class="truncate text-sm text-muted">{t.rol} · {t.client}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</section>

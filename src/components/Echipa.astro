@@ -1,0 +1,42 @@
+---
+import { echipa } from "../data/echipa";
+import { avatarSau } from "../lib/placeholder";
+
+import { suprafata } from "../lib/accent";
+const inclinari = ["tilt-1", "tilt-2", "tilt-3"];
+---
+<section id="echipa" class="scroll-mt-24 border-y-[4px] border-negru bg-crem-adanc px-4 py-20">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal max-w-2xl">
+      <p class="nb-mic mb-5 inline-block bg-coral px-3.5 py-1.5 text-sm font-bold">Echipa</p>
+      <h2 class="text-3xl font-bold sm:text-5xl">Cine lucrează la site-ul tău</h2>
+      <p class="mt-5 text-lg text-muted">
+        Fiecare rol are un om în spate și o responsabilitate clară. Tu discuți cu o singură persoană,
+        dar în spate lucrează toată echipa.
+      </p>
+    </div>
+
+    <ul class="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+      {echipa.map((m, i) => (
+        <li class={`nb nb-press reveal flex flex-col bg-crem p-6 text-center ${inclinari[i % 3]}`}>
+          <img
+            src={avatarSau(m.avatar, m.nume, m.accent)}
+            alt={`${m.nume} — ${m.rol}`}
+            width="128"
+            height="128"
+            loading="lazy"
+            class="mx-auto h-32 w-32 rounded-full border-[4px] border-negru bg-crem object-cover"
+          />
+          <h3 class="mt-5 text-xl font-bold">{m.nume}</h3>
+          <p class={`nb-mic mx-auto mt-3 inline-block ${suprafata[m.accent]} px-3 py-1 text-sm font-bold`}>{m.rol}</p>
+          <p class="mt-4 flex-1 text-left text-muted">{m.descriere}</p>
+          <ul class="mt-5 flex flex-wrap justify-center gap-2">
+            {m.atributii.map((a) => (
+              <li class="rounded-full border-2 border-negru/25 px-2.5 py-1 text-xs font-semibold text-muted">{a}</li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

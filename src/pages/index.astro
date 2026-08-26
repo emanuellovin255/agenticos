@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import LogoWall from "../components/LogoWall.astro";
+import Servicii from "../components/Servicii.astro";
+import Portofoliu from "../components/Portofoliu.astro";
+import Proces from "../components/Proces.astro";
+import Testimoniale from "../components/Testimoniale.astro";
+import Echipa from "../components/Echipa.astro";
+import Faq from "../components/Faq.astro";
+import CtaFinal from "../components/CtaFinal.astro";
+import { site } from "../data/site";
+---
+<Base
+  titlu={site.nume}
+  descriere={`${site.tagline} Construim site-uri rapide și clare pentru afaceri din România, gândite să transforme vizitatorii în clienți.`}
+>
+  <Hero />
+  <LogoWall />
+  <Servicii />
+  <Portofoliu />
+  <Proces />
+  <Testimoniale />
+  <Echipa />
+  <Faq />
+  <CtaFinal />
+</Base>

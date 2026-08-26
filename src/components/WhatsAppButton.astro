@@ -1,0 +1,38 @@
+---
+import Icon from "./Icon.astro";
+import { linkWhatsApp } from "../lib/whatsapp";
+
+interface Props {
+  /** Mesajul deja scris in casuta de WhatsApp. */
+  mesaj?: string;
+  /** Textul de pe buton. */
+  eticheta?: string;
+  marime?: "mare" | "normal";
+  /** "coral" (implicit) sau "galben". Pe ambele se scrie cu NEGRU. */
+  culoare?: "coral" | "galben";
+  class?: string;
+}
+
+const {
+  mesaj,
+  eticheta = "Cere ofertă personalizată",
+  marime = "normal",
+  culoare = "coral",
+  class: cls = "",
+} = Astro.props;
+
+const fundal = culoare === "coral" ? "bg-coral" : "bg-galben";
+const dim = marime === "mare"
+  ? "px-8 py-5 text-lg sm:text-xl gap-3"
+  : "px-6 py-3.5 text-base gap-2.5";
+---
+<a
+  href={linkWhatsApp(mesaj)}
+  target="_blank"
+  rel="noopener noreferrer"
+  class={`nb nb-press inline-flex items-center justify-center font-bold text-negru ${fundal} ${dim} ${cls}`}
+  style="font-family: var(--font-titlu)"
+>
+  <Icon nume="whatsapp" marime={marime === "mare" ? 26 : 21} />
+  <span>{eticheta}</span>
+</a>

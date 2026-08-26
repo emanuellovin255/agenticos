@@ -1,0 +1,25 @@
+---
+import { proces } from "../data/servicii";
+---
+<section class="border-y-[4px] border-negru bg-violet-d px-4 py-20 text-white">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal max-w-2xl">
+      <p class="nb-mic mb-5 inline-block bg-galben px-3.5 py-1.5 text-sm font-bold text-negru">Cum lucrăm</p>
+      <h2 class="text-3xl font-bold sm:text-5xl">Patru pași, zero surprize</h2>
+      <p class="mt-5 text-lg text-white/80">
+        Știi în fiecare moment unde suntem și ce urmează. Nu dispărem cu proiectul două săptămâni.
+      </p>
+    </div>
+
+    <ol class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {proces.map((p) => (
+        <li class="nb reveal flex flex-col bg-crem p-6 text-negru">
+          <span class="text-5xl font-bold text-negru/15" style="font-family: var(--font-titlu)">{p.numar}</span>
+          <h3 class="mt-2 text-xl font-bold">{p.titlu}</h3>
+          <p class="mt-2.5 flex-1 text-muted">{p.descriere}</p>
+          <span class="nb-mic mt-5 self-start bg-galben px-2.5 py-1 text-xs font-bold">{p.durata}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

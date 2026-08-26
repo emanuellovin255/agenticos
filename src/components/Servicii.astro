@@ -1,0 +1,48 @@
+---
+import { servicii } from "../data/servicii";
+import Icon from "./Icon.astro";
+import WhatsAppButton from "./WhatsAppButton.astro";
+import { mesajPentruServiciu } from "../lib/whatsapp";
+
+import { suprafata } from "../lib/accent";
+---
+<section id="servicii" class="scroll-mt-24 px-4 py-20">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal max-w-2xl">
+      <p class="nb-mic mb-5 inline-block bg-violet-d px-3.5 py-1.5 text-sm font-bold text-white">Servicii</p>
+      <h2 class="text-3xl font-bold sm:text-5xl">Ce putem construi pentru tine</h2>
+      <p class="mt-5 text-lg text-muted">
+        Alegi doar ce ai nevoie. Nu vindem pachete umflate cu lucruri pe care nu le folosești niciodată.
+      </p>
+    </div>
+
+    <ul class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {servicii.map((s) => (
+        <li class="nb nb-press reveal flex flex-col bg-crem p-6">
+          <span class={`nb-mic mb-5 grid h-14 w-14 place-items-center ${suprafata[s.accent]}`}>
+            <Icon nume={s.icon} marime={26} />
+          </span>
+          <h3 class="text-xl font-bold">{s.titlu}</h3>
+          <p class="mt-2.5 text-muted">{s.descriere}</p>
+          <ul class="mt-5 space-y-2">
+            {s.include.map((i) => (
+              <li class="flex items-start gap-2 text-sm font-semibold">
+                <span class="mt-0.5 shrink-0 text-coral"><Icon nume="check" marime={16} /></span>
+                {i}
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+
+    <div class="reveal mt-12 flex flex-col items-center gap-4 text-center">
+      <p class="text-lg font-semibold">Nu ești sigur ce îți trebuie?</p>
+      <WhatsAppButton
+        eticheta="Cere ofertă personalizată"
+        mesaj={mesajPentruServiciu("un site pentru afacerea mea")}
+        marime="mare"
+      />
+    </div>
+  </div>
+</section>
