@@ -38,11 +38,20 @@ import { suprafata } from "../lib/accent";
 
     <div class="reveal mt-12 flex flex-col items-center gap-4 text-center">
       <p class="text-lg font-semibold">Nu ești sigur ce îți trebuie?</p>
-      <WhatsAppButton
-        eticheta="Cere ofertă personalizată"
-        mesaj={mesajPentruServiciu("un site pentru afacerea mea")}
-        marime="mare"
-      />
+      <div class="flex flex-col items-center gap-4 sm:flex-row">
+        <WhatsAppButton
+          eticheta="Cere ofertă personalizată"
+          mesaj={mesajPentruServiciu("un site pentru afacerea mea")}
+          marime="mare"
+        />
+        <a
+          href="/investitie"
+          class="nb nb-press inline-flex items-center gap-2 bg-crem px-7 py-5 text-lg font-bold"
+          style="font-family: var(--font-titlu)"
+        >
+          Vezi pachetele <Icon nume="sageata" marime={20} />
+        </a>
+      </div>
     </div>
   </div>
 </section>

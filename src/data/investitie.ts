@@ -1,8 +1,12 @@
 /**
  * ============================================================
- *  PACHETE SI PRETURI
+ *  PACHETE SI INVESTITIE
  * ------------------------------------------------------------
- *  Preturile se scriu ca text, exact cum vrei sa apara pe site
+ *  Pe site vorbim despre INVESTITIE, nu despre pret: clientul nu
+ *  cumpara un fisier, ci un instrument care ii aduce clienti. Tine
+ *  limbajul asta si cand scrii aici.
+ *
+ *  Sumele se scriu ca text, exact cum vrei sa apara pe site
  *  (in romana, separatorul de mii e punctul: "1.579 lei").
  * ============================================================
  */
@@ -10,8 +14,8 @@
 export type Pachet = {
   slug: string;
   nume: string;
-  /** Pretul, scris exact cum apare pe site. */
-  pret: string;
+  /** Suma, scrisa exact cum apare pe site. Se plateste o singura data. */
+  investitie: string;
   /** O fraza care spune pentru CINE e pachetul. */
   potrivitPentru: string;
   /** 2-3 fraze in limbaj normal. Fara termeni tehnici. */
@@ -27,7 +31,7 @@ export const pachete: Pachet[] = [
   {
     slug: "pagina-de-prezentare",
     nume: "Pagină de prezentare",
-    pret: "1.579 lei",
+    investitie: "1.579 lei",
     potrivitPentru: "Pentru afaceri mici care vor să fie găsite și contactate rapid",
     descriere:
       "O singură pagină, dar completă. Cineva intră, derulează de sus până jos și află tot ce trebuie: ce faci, de ce ești alegerea bună și cum te contactează. E cea mai rapidă cale să exiști online ca lumea.",
@@ -43,7 +47,7 @@ export const pachete: Pachet[] = [
   {
     slug: "website-complet",
     nume: "Website complet",
-    pret: "2.865 lei",
+    investitie: "2.865 lei",
     potrivitPentru: "Pentru afaceri cu mai multe servicii sau mai multe lucruri de arătat",
     descriere:
       "Mai multe pagini separate — acasă, servicii, despre noi, galerie, contact. Fiecare serviciu are locul lui, cu spațiu să-l explici cum trebuie. Alegerea potrivită când o singură pagină devine prea încărcată.",
@@ -61,7 +65,7 @@ export const pachete: Pachet[] = [
   {
     slug: "magazin-online",
     nume: "Magazin online complet",
-    pret: "4.497 lei",
+    investitie: "4.497 lei",
     potrivitPentru: "Pentru cine vinde produse și vrea banii direct, fără intermediari",
     descriere:
       "Vinzi direct de pe site-ul tău. Clientul alege produsele, plătește cu cardul, tu primești comanda pe e-mail. Fără comision către alte platforme și fără să dai jumătate din câștig altcuiva.",
@@ -96,6 +100,31 @@ export const incluseInToate = [
   },
 ];
 
-/** Ce vrem sa fie clar inainte ca omul sa intrebe de pret. */
-export const notitaPret =
-  "Prețurile sunt finale pentru pachetul respectiv — nu apar costuri surprize la final. Domeniul și găzduirea se plătesc separat, direct de tine, și rămân pe numele tău.";
+/** Ce vrem sa fie clar inainte ca omul sa intrebe cat costa. */
+export const notitaInvestitie =
+  "Sumele sunt finale pentru pachetul respectiv — nu apar costuri surpriză la final și nu plătești nimic lunar către noi. Domeniul și găzduirea se plătesc separat, direct de tine, și rămân pe numele tău.";
+
+/**
+ * Cele trei lucruri care fac diferenta intre „pret" si „investitie".
+ * Apar deasupra pachetelor, ca omul sa stie ce cumpara inainte sa vada suma.
+ */
+export const deCeInvestitie = [
+  {
+    titlu: "Plătești o singură dată",
+    descriere:
+      "Nu e abonament. Suma din pachet e tot ce dai către noi, iar site-ul rămâne al tău din prima zi.",
+    icon: "check" as const,
+  },
+  {
+    titlu: "Nu plătești mentenanța",
+    descriere:
+      "Actualizările, copiile de siguranță și verificările intră în pachet. Nu apare niciun cost lunar peste.",
+    icon: "fulger" as const,
+  },
+  {
+    titlu: "Îl administrezi singur",
+    descriere:
+      "Primești un panou din care schimbi texte, poze și prețuri fără să ne suni și fără să plătești pe oră.",
+    icon: "monitor" as const,
+  },
+];

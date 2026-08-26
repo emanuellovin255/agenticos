@@ -22,13 +22,20 @@ function pozaPentru(imagine: string): ImageMetadata | undefined {
   return cheie ? pozeEchipa[cheie]!.default : undefined;
 }
 
+interface Props {
+  /** Pe pagina proprie titlul e h1; ca sectiune intr-o pagina, ramane h2. */
+  caPagina?: boolean;
+}
+const { caPagina = false } = Astro.props;
+const Titlu = caPagina ? "h1" : "h2";
+
 const inclinari = ["tilt-1", "tilt-2", "tilt-3"];
 ---
 <section id="echipa" class="scroll-mt-24 border-y-[4px] border-negru bg-crem-adanc px-4 py-20">
   <div class="mx-auto max-w-6xl">
     <div class="reveal max-w-2xl">
       <p class="nb-mic mb-5 inline-block bg-coral px-3.5 py-1.5 text-sm font-bold">Echipa</p>
-      <h2 class="text-3xl font-bold sm:text-5xl">Cine lucrează la site-ul tău</h2>
+      <Titlu class="text-3xl font-bold sm:text-5xl">Cine lucrează la site-ul tău</Titlu>
       <p class="mt-5 text-lg text-muted">
         Tu discuți cu o singură persoană, dar în spate lucrează cinci. Fiecare are treaba lui
         clară, ca nimic să nu rămână „al nimănui”.

@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import Echipa from "../components/Echipa.astro";
+import CtaFinal from "../components/CtaFinal.astro";
+import { echipa } from "../data/echipa";
+---
+<Base
+  titlu="Echipa"
+  descriere={`Cei ${echipa.length} oameni care lucrează la site-ul tău: project manager, designer, developer, copywriter și QA. Tu vorbești cu unul singur, restul lucrează în spate.`}
+>
+  <Echipa caPagina />
+
+  <CtaFinal
+    titlu="Hai să ne cunoaștem"
+    subtitlu="Prima discuție e cu project managerul și e gratuită. Îmi spui ce faci, îți spun ce se poate face."
+  />
+</Base>

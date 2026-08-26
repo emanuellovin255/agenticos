@@ -13,7 +13,7 @@ export const faq: Intrebare[] = [
   {
     intrebare: "Cât costă un site?",
     raspuns:
-      "Prețurile sunt afișate pe site: o pagină de prezentare costă 1.579 lei, un website complet 2.865 lei, iar un magazin online complet 4.497 lei. Sunt prețuri finale pentru pachetul respectiv — nu apar costuri surpriză la final. Separat plătești doar domeniul și găzduirea, direct de tine, și rămân pe numele tău.",
+      "Sumele sunt afișate pe pagina de investiție: o pagină de prezentare e 1.579 lei, un website complet 2.865 lei, iar un magazin online complet 4.497 lei. Plătești o singură dată, nu lunar, iar mentenanța e inclusă. Separat plătești doar domeniul și găzduirea, direct de tine, și rămân pe numele tău.",
   },
   {
     intrebare: "În cât timp e gata?",

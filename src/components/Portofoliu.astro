@@ -2,17 +2,27 @@
 import { clienti } from "../data/clienti";
 import { logoSau } from "../lib/placeholder";
 import Icon from "./Icon.astro";
+import { cuDe } from "../lib/numar";
 
 import { suprafata, suprafataSecundar } from "../lib/accent";
+
+interface Props {
+  /** Pe pagina proprie titlul e h1; ca sectiune intr-o pagina, ramane h2. */
+  caPagina?: boolean;
+}
+const { caPagina = false } = Astro.props;
+const Titlu = caPagina ? "h1" : "h2";
+
 const inclinari = ["tilt-1", "tilt-2", "tilt-3"];
 ---
 <section id="portofoliu" class="scroll-mt-24 px-4 py-20">
   <div class="mx-auto max-w-6xl">
     <div class="reveal max-w-2xl">
       <p class="nb-mic mb-5 inline-block bg-coral px-3.5 py-1.5 text-sm font-bold text-negru">Portofoliu</p>
-      <h2 class="text-3xl font-bold sm:text-5xl">Lucrări din care poți cere referințe</h2>
+      <Titlu class="text-3xl font-bold sm:text-5xl">Lucrări din care poți cere referințe</Titlu>
       <p class="mt-5 text-lg text-muted">
-        Fiecare proiect are o poveste: ce nu funcționa înainte și ce s-a schimbat după.
+        {cuDe(clienti.length, "site-uri")} livrate, fiecare cu povestea lui: ce nu funcționa
+        înainte și ce s-a schimbat după. Apasă pe oricare ca să vezi proiectul întreg.
       </p>
     </div>
 

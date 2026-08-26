@@ -69,17 +69,25 @@ Ca să scoți un poster dintr-un video nou:
 ffmpeg -ss 3 -i public/testimoniale/nume.mp4 -frames:v 1 -q:v 3 public/testimoniale/nume-poster.jpg
 ```
 
-### 4. Prețurile — `src/data/preturi.ts`
+### 4. Investiția — `src/data/investitie.ts`
 
-Cele trei pachete, cu prețurile scrise ca text simplu (`"1.579 lei"`) — le schimbi direct,
+**Pe site nu scrie nicăieri „preț", scrie „investiție".** Clientul nu cumpără un fișier, ci
+un instrument care îi aduce clienți — ține limbajul ăsta și când scrii aici. Pagina e la
+`/investitie`.
+
+Cele trei pachete, cu sumele scrise ca text simplu (`"1.579 lei"`) — le schimbi direct,
 fără să atingi altceva. `recomandat: true` pune eticheta „Cel mai ales" pe un pachet;
 pune-l la unul singur.
+
+`deCeInvestitie` sunt cele trei motive afișate deasupra pachetelor (plătești o dată,
+mentenanța e inclusă, îl administrezi singur) — ele fac diferența între „cost" și
+„investiție", deci apar înainte ca omul să vadă suma.
 
 `incluseInToate` sunt beneficiile care apar în toate pachetele — acum tabloul de bord și
 mentenanța gratuită. Apar și în lista fiecărui card, și explicate pe larg dedesubt, dintr-un
 singur loc.
 
-Dacă schimbi prețurile, actualizează și răspunsul „Cât costă un site?" din `src/data/faq.ts`,
+Dacă schimbi sumele, actualizează și răspunsul „Cât costă un site?" din `src/data/faq.ts`,
 unde sunt scrise explicit.
 
 ### 5. Echipa — `src/data/echipa.ts`
@@ -153,13 +161,26 @@ src/
 ├─ lib/
 │  ├─ whatsapp.ts     construiește linkurile wa.me cu mesaj precompletat
 │  ├─ placeholder.ts  desenează substitutele pentru imaginile lipsă
+│  ├─ numar.ts        acordul numeralului („17 site-uri", dar „24 de site-uri")
 │  └─ accent.ts       perechile de culoare fundal/text care trec pragul de contrast
 ├─ layouts/Base.astro  <head>, SEO, date structurate, fonturi
-├─ components/         secțiunile paginii
+├─ components/         secțiunile, folosite și pe prima pagină, și pe paginile proprii
 └─ pages/
-   ├─ index.astro
-   └─ portofoliu/[slug].astro   ← o pagină per client, generată automat
+   ├─ index.astro               hero, clienți, servicii, proces, testimoniale, întrebări
+   ├─ investitie.astro          pachetele
+   ├─ echipa.astro              cei cinci oameni
+   └─ portofoliu/
+      ├─ index.astro            toate proiectele
+      └─ [slug].astro           ← o pagină per client, generată automat
 ```
+
+**Portofoliul, investiția și echipa au pagini proprii, nu secțiuni pe prima pagină.** Prima
+pagină rămâne scurtă și trimite spre ele: din meniu, din butonul de sub logourile clienților
+și din secțiunea Servicii.
+
+Componentele sunt aceleași în ambele situații. Cele trei primesc `caPagina` când sunt folosite
+ca pagină — atât schimbă: titlul se randează `<h1>` în loc de `<h2>`, ca fiecare pagină să aibă
+un singur titlu principal.
 
 ### Decizii care contează
 

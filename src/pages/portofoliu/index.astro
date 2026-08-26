@@ -1,0 +1,18 @@
+---
+import Base from "../../layouts/Base.astro";
+import Portofoliu from "../../components/Portofoliu.astro";
+import CtaFinal from "../../components/CtaFinal.astro";
+import { clienti } from "../../data/clienti";
+import { cuDe } from "../../lib/numar";
+---
+<Base
+  titlu="Portofoliu"
+  descriere={`${cuDe(clienti.length, "site-uri")} livrate pentru pensiuni, săli de evenimente, școli auto și firme de servicii. Fiecare proiect cu povestea lui și cu linkul către site-ul live.`}
+>
+  <Portofoliu caPagina />
+
+  <CtaFinal
+    titlu="Vrei un site ca acestea?"
+    subtitlu="Spune-ne ce faci și îți arătăm cum ar arăta site-ul tău. Prima discuție e gratuită."
+  />
+</Base>
