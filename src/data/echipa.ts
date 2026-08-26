@@ -2,69 +2,74 @@
  * ============================================================
  *  ECHIPA
  * ------------------------------------------------------------
- *  Pune avatarurile cartoon in /public/echipa/ si scrie numele
- *  fisierului la `avatar`. Cat timp e "", se deseneaza automat
- *  un avatar-placeholder cu initialele.
+ *  Ordinea de aici e ordinea de pe site.
+ *
+ *  POZELE stau in src/assets/echipa/. Campul `imagine` e numele
+ *  fisierului FARA extensie. Ca sa schimbi o poza, inlocuieste
+ *  fisierul pastrand acelasi nume — nu trebuie sa modifici nimic aici.
+ *  Daca `imagine` e "" sau fisierul lipseste, se deseneaza automat
+ *  un avatar-substitut, ca sa nu ramana un loc gol.
  * ============================================================
  */
 
 export type Membru = {
-  /** ⚠ Numele real al persoanei. */
-  nume: string;
+  /** Rolul — asta e titlul cardului. */
   rol: string;
-  /** O fraza despre ce face concret persoana asta in proiect. */
+  /** Numele persoanei. Optional: lasa "" si se afiseaza doar rolul. */
+  nume: string;
+  /** O singura propozitie, pe intelesul oricui. Fara termeni tehnici. */
   descriere: string;
-  /** Ce livreaza efectiv. Apare ca lista de etichete pe card. */
+  /** Ce face concret. Apare ca lista de etichete. */
   atributii: string[];
-  /** "/echipa/nume.png" — lasa "" pentru placeholder cu initiale. */
-  avatar: string;
+  /** Numele fisierului din src/assets/echipa/, fara extensie. */
+  imagine: string;
   accent: "galben" | "coral" | "violet";
 };
 
 export const echipa: Membru[] = [
   {
-    nume: "Tu", // ⚠ pune-ti numele aici
-    rol: "Strategist / Project Manager",
+    rol: "Project Manager",
+    nume: "", // ⚠ pune numele aici daca vrei sa apara
     descriere:
-      "Discută cu clientul, definește obiectivele, structura site-ului, tonul de brand și termenele. E singura persoană cu care ai de vorbit de la început până la final.",
-    atributii: ["Discuție inițială", "Obiective", "Structura site-ului", "Ton de brand", "Termene"],
-    avatar: "",
+      "Persoana cu care vorbești de la primul mesaj până la lansare: înțelege ce vrei, ține totul în grafic și îți spune mereu unde suntem.",
+    atributii: ["Discuția inițială", "Obiective", "Structura site-ului", "Termene"],
+    imagine: "project-manager",
     accent: "coral",
   },
   {
-    nume: "UX/UI Designer",
-    rol: "Design & identitate vizuală",
+    rol: "UX/UI Designer",
+    nume: "",
     descriere:
-      "Construiește layoutul, paleta de culori și identitatea vizuală. Lucrează cu mockup-uri și canvas vizual, ca să vezi site-ul înainte să existe.",
-    atributii: ["Layout", "Paletă de culori", "Identitate vizuală", "Mockup-uri"],
-    avatar: "",
+      "Decide cum arată site-ul și unde stă fiecare buton, ca vizitatorul să găsească din prima ce caută, fără să se piardă.",
+    atributii: ["Aspectul paginilor", "Culori și fonturi", "Identitate vizuală"],
+    imagine: "ux-ui-designer",
     accent: "violet",
   },
   {
-    nume: "Web Developer",
-    rol: "Dezvoltare",
+    rol: "Web Developer",
+    nume: "",
     descriere:
-      "Transformă designul în site real: cod, funcționalitate, comportament pe telefon și tabletă. Se ocupă ca totul să funcționeze, nu doar să arate bine.",
-    atributii: ["Cod", "Funcționalitate", "Responsive", "Integrări"],
-    avatar: "",
+      "Transformă desenul în site care chiar funcționează — la fel de bine pe telefon, pe tabletă și pe calculator.",
+    atributii: ["Construcția site-ului", "Funcționalități", "Afișare pe telefon"],
+    imagine: "web-developer",
     accent: "galben",
   },
   {
-    nume: "Content & Copywriting",
-    rol: "Texte & SEO on-page",
+    rol: "Content & Copywriting",
+    nume: "",
     descriere:
-      "Scrie textele, structura SEO on-page, descrierile de servicii și îndemnurile la acțiune. Se asigură că fiecare pagină spune ceva, nu doar umple spațiu.",
-    atributii: ["Texte", "SEO on-page", "Descrieri servicii", "Call-to-action"],
-    avatar: "",
+      "Scrie textele de pe site, ca omul care intră să înțeleagă din primele secunde ce faci și de ce merită să te aleagă.",
+    atributii: ["Textele paginilor", "Descrieri de servicii", "Optimizare pentru Google"],
+    imagine: "copywriting",
     accent: "coral",
   },
   {
-    nume: "QA & Optimizare",
-    rol: "Testare & performanță",
+    rol: "QA & Optimizare",
+    nume: "",
     descriere:
-      "Testează totul pe dispozitive reale, verifică viteza de încărcare și face optimizările tehnice SEO înainte de livrare. Nimic nu pleacă nevăzut.",
-    atributii: ["Testare", "Performanță", "Verificare cross-device", "SEO tehnic"],
-    avatar: "",
+      "Verifică tot site-ul înainte de lansare și se asigură că se încarcă repede și că nimic nu se strică pe niciun telefon.",
+    atributii: ["Testare pe dispozitive reale", "Viteză de încărcare", "Verificări finale"],
+    imagine: "qa-optimizare",
     accent: "violet",
   },
 ];

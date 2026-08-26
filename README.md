@@ -62,20 +62,39 @@ Ca să scoți un poster dintr-un video nou:
 ffmpeg -ss 3 -i public/testimoniale/nume.mp4 -frames:v 1 -q:v 3 public/testimoniale/nume-poster.jpg
 ```
 
-### 4. Echipa — `src/data/echipa.ts`
+### 4. Prețurile — `src/data/preturi.ts`
 
-Înlocuiește `nume: "Tu"` cu numele tău. Restul rolurilor sunt deja scrise.
+Cele trei pachete, cu prețurile scrise ca text simplu (`"1.579 lei"`) — le schimbi direct,
+fără să atingi altceva. `recomandat: true` pune eticheta „Cel mai ales" pe un pachet;
+pune-l la unul singur.
 
-### 5. Imaginile
+`incluseInToate` sunt beneficiile care apar în toate pachetele — acum tabloul de bord și
+mentenanța gratuită. Apar și în lista fiecărui card, și explicate pe larg dedesubt, dintr-un
+singur loc.
+
+Dacă schimbi prețurile, actualizează și răspunsul „Cât costă un site?" din `src/data/faq.ts`,
+unde sunt scrise explicit.
+
+### 5. Echipa — `src/data/echipa.ts`
+
+Cele cinci roluri sunt deja scrise, în ordinea în care apar pe site. Titlul cardului e
+**rolul**; câmpul `nume` e opțional — dacă îl lași `""`, se afișează doar rolul.
+
+`imagine` e numele fișierului din `src/assets/echipa/`, fără extensie.
+
+### 6. Imaginile
 
 Pune fișierele în folderele de mai jos și scrie calea în fișierul de date corespunzător.
 **Cât timp câmpul e `""`, se desenează automat un substitut în stilul site-ului** — nicio
 imagine lipsă nu lasă un pătrat gol.
 
+**Pozele echipei sunt excepția**: stau în `src/assets/echipa/`, nu în `public/`. Acolo Astro
+le optimizează la build — le-a dus de la ~4 MB la ~100 KB în total, trecându-le pe webp. Ca să
+schimbi o poză, înlocuiește fișierul păstrând același nume și gata.
+
 | Folder | Ce pui | Dimensiune recomandată |
 |---|---|---|
 | `public/logos/` | logourile clienților | pătrat, SVG sau PNG transparent |
-| `public/echipa/` | avatarurile cartoon | pătrat, ~600×600 |
 | `public/portofoliu/` | capturi din site-urile livrate | 1600×1000 |
 | `public/testimoniale/` | videoclipuri + postere | video vertical 9:16 |
 | `public/og-default.png` | imaginea de previzualizare la partajare | 1200×630 |
@@ -121,6 +140,11 @@ Google, zero layout shift, fără cookie-uri de la terți.
 
 Pe galben și coral se scrie cu **negru**. Violetul deschis rămâne decorativ; oriunde apare
 text pe violet se folosește varianta închisă.
+
+**Înclinarea, apariția și apăsarea folosesc proprietăți CSS diferite.** Cardurile sunt ușor
+înclinate (`rotate`), apar prin alunecare la scroll (`translate`) și se „apasă" mecanic la
+click (`transform`). Dacă toate trei ar folosi `transform`, ultima ar șterge-o pe prima —
+cardurile își pierdeau înclinarea în momentul în care deveneau vizibile.
 
 **Videoclipurile nu se încarcă la deschiderea paginii.** Se vede doar posterul (~30–80 KB);
 fișierul pornește abia la click. Fără asta, cele două testimoniale ar trage 16 MB la fiecare

@@ -13,7 +13,7 @@ export const faq: Intrebare[] = [
   {
     intrebare: "Cât costă un site?",
     raspuns:
-      "Depinde de câte pagini are și ce trebuie să facă. Un site de prezentare pentru o afacere locală pornește de la un preț pe care ți-l spunem în prima discuție, după ce înțelegem ce ai nevoie. Nu lucrăm cu prețuri ascunse: primești o ofertă scrisă, cu tot ce include, înainte să începem.",
+      "Prețurile sunt afișate pe site: o pagină de prezentare costă 1.579 lei, un website complet 2.865 lei, iar un magazin online complet 4.497 lei. Sunt prețuri finale pentru pachetul respectiv — nu apar costuri surpriză la final. Separat plătești doar domeniul și găzduirea, direct de tine, și rămân pe numele tău.",
   },
   {
     intrebare: "În cât timp e gata?",
@@ -39,6 +39,16 @@ export const faq: Intrebare[] = [
     intrebare: "Ce se întâmplă dacă nu îmi place designul?",
     raspuns:
       "Vezi designul înainte să se construiască ceva. Ceri modificări până când ești mulțumit — nu trecem la construcție până nu spui tu că e bine.",
+  },
+  {
+    intrebare: "Chiar pot să modific singur site-ul?",
+    raspuns:
+      "Da, și e mai simplu decât pare. Primești un tablou de bord făcut special pentru site-ul tău: intri cu un utilizator și o parolă, vezi căsuțe cu textele și pozele de pe site, schimbi ce vrei și apeși „Salvează”. Nu instalezi nimic și nu ai nevoie de cunoștințe tehnice. Îți arătăm o dată cum funcționează și gata.",
+  },
+  {
+    intrebare: "Ce înseamnă mentenanța gratuită?",
+    raspuns:
+      "Înseamnă că ne ocupăm noi ca site-ul să rămână rapid, sigur și funcțional: facem actualizările, ținem copii de siguranță și verificăm periodic că totul merge. Nu plătești un abonament lunar pentru asta și nu trebuie să ții tu minte când se actualizează ceva.",
   },
   {
     intrebare: "Cine deține site-ul?",

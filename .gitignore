@@ -9,3 +9,6 @@ node_modules/
 # Videoclipurile originale — copiile folosite de site sunt in public/testimoniale/,
 # nu are rost sa urcam de doua ori aceleasi 16 MB.
 /Testimoniale/
+
+# Pozele originale ale echipei — copiile optimizate stau in src/assets/echipa/
+/Echipa/

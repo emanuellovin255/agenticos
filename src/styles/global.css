@@ -99,11 +99,15 @@ h1, h2, h3, h4 {
   box-shadow: 2px 2px 0 var(--color-negru);
 }
 
-/* Inclinari alternante — aspect de sticker lipit pe pagina */
-.tilt-1 { transform: rotate(-1.6deg); }
-.tilt-2 { transform: rotate(1.4deg); }
-.tilt-3 { transform: rotate(-0.9deg); }
-.tilt-1:hover, .tilt-2:hover, .tilt-3:hover { transform: rotate(0deg) translate(-2px, -2px); }
+/* Inclinari alternante — aspect de sticker lipit pe pagina.
+   Folosim proprietatea `rotate`, nu `transform`, ca sa nu se bata cap in cap
+   cu `.reveal` (care misca pe `translate`) si cu `.nb-press` (care foloseste
+   `transform`). Fiecare efect isi are propria proprietate, deci se compun. */
+.tilt-1 { rotate: -1.6deg; }
+.tilt-2 { rotate: 1.4deg; }
+.tilt-3 { rotate: -0.9deg; }
+.tilt-1, .tilt-2, .tilt-3 { transition: rotate 160ms ease; }
+.tilt-1:hover, .tilt-2:hover, .tilt-3:hover { rotate: 0deg; }
 
 /* Text subliniat cu o dunga groasa de marker */
 .marcat {
@@ -128,12 +132,12 @@ h1, h2, h3, h4 {
    continutul nu depinde niciodata de JavaScript ca sa poata fi citit. */
 html.js-reveal .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 520ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  translate: 0 22px;
+  transition: opacity 520ms ease, translate 520ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 html.js-reveal .reveal.vizibil {
   opacity: 1;
-  transform: translateY(0);
+  translate: 0 0;
 }
 
 /* Banda de logouri, in bucla continua */
@@ -163,6 +167,6 @@ html.js-reveal .reveal.vizibil {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .reveal { opacity: 1; translate: none; }
   .banda { animation: none; }
 }
