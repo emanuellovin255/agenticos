@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "logos": "python3 scripts/prep-logos.py",
-    "echipa": "python3 scripts/prep-echipa.py"
+    "echipa": "python3 scripts/prep-echipa.py",
+    "capturi": "node scripts/capturi.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

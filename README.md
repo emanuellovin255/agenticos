@@ -144,10 +144,27 @@ Ca să adaugi un logo nou: pune fișierul în `/Logos/` și adaugă-l în tabelu
 `scripts/prep-logos.py` (nume de fișier → nume de slug). Scriptul are nevoie de Python 3 cu
 Pillow instalat.
 
+#### Capturile din site-urile clienților
+
+Poza cu prima pagină a fiecărui site apare pe pagina lui de portofoliu. Nu o faci de mână.
+Rulezi:
+
+```bash
+npm run capturi
+```
+
+Scriptul citește singur linkurile din `clienti.ts`, deschide fiecare site într-un Chrome fără
+fereastră, închide bannerul de cookies și fereastra de alegere a limbii (altfel ar acoperi
+tocmai partea de sus, care interesează), și salvează poza în `public/portofoliu/<slug>.jpg`.
+Clienții fără `linkSite` sunt săriți — pe pagina lor rămâne substitutul desenat.
+
+Ai nevoie doar de Google Chrome în `/Applications`. Rulează comanda din nou după ce un client
+își schimbă site-ul, ca poza din portofoliu să nu rămână veche.
+
 | Folder | Ce pui | Dimensiune recomandată |
 |---|---|---|
 | `public/logos/` | logourile clienților | PNG, generat cu `npm run logos` |
-| `public/portofoliu/` | capturi din site-urile livrate | 1600×1000 |
+| `public/portofoliu/` | capturi din site-urile livrate | JPG, generat cu `npm run capturi` |
 | `public/testimoniale/` | videoclipuri + postere | video vertical 9:16 |
 | `public/og-default.png` | imaginea de previzualizare la partajare | 1200×630 |
 

@@ -12,6 +12,10 @@
  *
  *  LOGOURILE stau in /public/logos/. Originalele sunt in /Logos/ si se
  *  pregatesc cu `npm run logos` (taie marginea, curata, salveaza PNG-ul).
+ *
+ *  CAPTURILE de pe site-urile clientilor se fac singure cu `npm run capturi`:
+ *  scriptul citeste linkSite-urile de mai jos si salveaza pozele in
+ *  /public/portofoliu/. Rulezi comanda si dupa ce un client isi schimba site-ul.
  * ============================================================
  */
 
@@ -33,7 +37,10 @@ export type Client = {
    *  sa arate la fel ca pe site-ul clientului. Lasa "" daca logoul are
    *  fundal transparent. O completeaza `npm run logos`. */
   logoFundal?: string;
-  /** Captura de ecran a site-ului, in /public/portofoliu/. Optional. */
+  /** Captura cu prima pagina a site-ului, in /public/portofoliu/.
+   *  Nu o faci manual: rulezi `npm run capturi` si scriptul deschide fiecare
+   *  linkSite de mai jos si salveaza poza. Lasa "" si se deseneaza un
+   *  substitut in stilul site-ului. */
   screenshot?: string;
   /** 2-4 fraze despre locatie. Apare pe pagina clientului. */
   descriere: string;
@@ -58,6 +65,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/pensiunea-izora.png",
     logoFundal: "#f7fafb",
+    screenshot: "/portofoliu/pensiunea-izora.jpg",
     descriere:
       "Pensiune de 4 margarete în Crișan, pe brațul Sulina, în inima Deltei Dunării. Se ajunge doar pe apă, cu transfer cu barca de la Murighiol. Are bucătărie pescărească proprie, șalupe rapide și excursii la Letea, Mila 23, Caraorman și Sulina.",
     provocare:
@@ -75,6 +83,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/belvedere-murighiol.png",
     logoFundal: "#fcfbf9",
+    screenshot: "/portofoliu/pensiunea-belvedere.jpg",
     descriere:
       "Pensiune pe malul Lacului Murighiol, în zona protejată a Deltei Dunării, la aproximativ patru ore de mers cu mașina din București. Are restaurant pescăresc propriu, piscină cu apă încălzită și excursii cu barca pe șase trasee din Deltă.",
     provocare:
@@ -92,6 +101,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/delta-resort-spa.png",
     logoFundal: "",
+    screenshot: "/portofoliu/delta-resort-spa.jpg",
     descriere:
       "Resort și spa în Delta Dunării, la Dunavățu de Jos: două piscine, saune, jacuzzi, restaurant cu pește proaspăt și debarcader cu bărci proprii.",
     livrabile: ["Site de prezentare", "Galerie foto", "Secțiune spa și facilități", "Cerere de rezervare"],
@@ -105,6 +115,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/mistique.png",
     logoFundal: "#21345e",
+    screenshot: "/portofoliu/pensiunea-mystique.jpg",
     descriere:
       "Pensiune de 3 stele în Arad, cartierul Micalaca. Camere cu balcon, aer condiționat și Wi-Fi gratuit, cu parcare privată și transfer de la aeroport incluse.",
     livrabile: ["Site de prezentare", "Prețuri pe cameră", "Rezervare pe WhatsApp"],
@@ -118,6 +129,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/pensiunea-lanasu.png",
     logoFundal: "#f7f4ed",
+    screenshot: "/portofoliu/pensiunea-la-nasu.jpg",
     descriere:
       "Pensiune cu 13 camere la Focșani, pe DN 2 la kilometrul 189. Camere cu baie proprie, aer condiționat, TV și Wi-Fi, parcare închisă și supravegheată, iar animalele de companie sunt binevenite.",
     livrabile: ["Site de prezentare", "Galerie foto pe camere", "Indicații de pe DN 2", "Optimizare pentru mobil"],
@@ -131,6 +143,7 @@ export const clienti: Client[] = [
     categorie: "Evenimente",
     logo: "/logos/potcoava-dunarii.png",
     logoFundal: "#0b1613",
+    screenshot: "/portofoliu/potcoava-dunarii.jpg",
     descriere:
       "Salon de evenimente de 600 de locuri pe malul Dunării, la Suhaia. Pe aceeași proprietate sunt cazare în cabane A-frame, restaurant cu bucătărie proprie și piscină.",
     livrabile: ["Site de prezentare", "Pagină de evenimente", "Galerie foto", "Formular de cerere ofertă"],
@@ -144,6 +157,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/pensiunea-giulia.png",
     logoFundal: "#f7f2e8",
+    screenshot: "/portofoliu/villa-giulia.jpg",
     descriere:
       "Pensiune de 3 stele pe malul Dunării, la Islaz. Opt camere cu mobilier antic, piscină, saună, grădină și o bucătărie italo-românească gătită cu produse din gospodăria proprie.",
     livrabile: ["Site de prezentare", "Galerie foto pe camere", "Pagină de restaurant", "Rezervare pe WhatsApp"],
@@ -157,6 +171,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "",
     logoFundal: "",
+    screenshot: "/portofoliu/casa-irlandeza.jpg",
     descriere:
       "Pensiune de 3 stele în Băile Felix, ținută de Florina și Eoghain. Camere cu balcon și bucătărie proprie, ciubăr cu hidromasaj, saună și grădină cu loc de joacă, la zece minute pe jos de ștrandurile Apollo.",
     livrabile: ["Site de prezentare", "Galerie foto", "Recenzii de pe Booking", "Rezervare pe WhatsApp"],
@@ -170,6 +185,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/piano-house.png",
     logoFundal: "#171514",
+    screenshot: "/portofoliu/piano-house.jpg",
     descriere:
       "Trei spații renovate complet în centrul orașului Alba Iulia, la zece minute de Cetatea Alba Carolina. Parcare gratuită în curte, bucătărie utilată și Wi-Fi nelimitat.",
     livrabile: ["Site de prezentare", "Site în două limbi", "Galerie pe apartamente", "Cerere de rezervare"],
@@ -183,6 +199,7 @@ export const clienti: Client[] = [
     categorie: "Evenimente",
     logo: "/logos/caprice.png",
     logoFundal: "#0a0d0a",
+    screenshot: "/portofoliu/caprice-events.jpg",
     descriere:
       "Nunți, botezuri și evenimente corporate în Bacău. Două saloane, grădină pentru cununie, hotel de 4 stele cu 21 de camere și spa, toate pe aceeași proprietate.",
     livrabile: ["Site de prezentare", "Site în două limbi", "Pagini pe saloane", "Formular de cerere ofertă"],
@@ -196,6 +213,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/vila-carolina-apulum.png",
     logoFundal: "#201c18",
+    screenshot: "/portofoliu/vila-carolina-apulum.jpg",
     descriere:
       "Cazare în regim hotelier în centrul Alba Iuliei, la cinci minute de Cetatea Alba Carolina. Wi-Fi și parcare gratuite, bucătărie utilată și două băi cu cadă cu hidromasaj.",
     livrabile: ["Site de prezentare", "Site în două limbi", "Galerie foto", "Rezervare pe WhatsApp"],
@@ -209,6 +227,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/pensiunea-beverly-hills.png",
     logoFundal: "#d4e0ed",
+    screenshot: "/portofoliu/pensiunea-beverly-hills.jpg",
     descriere:
       "Pensiune în Băile Felix, la cinci minute pe jos de Izvorul Apollo. Camere între 20 și 48 de metri pătrați, bucătărie și living la comun, terasă cu grătar, foișor, loc de joacă și parcare gratuită.",
     livrabile: ["Site de prezentare", "Galerie foto pe camere", "Recenzii de la oaspeți", "Optimizare pentru mobil"],
@@ -222,6 +241,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/pensiunea-raul-iulia.png",
     logoFundal: "#f6f4ed",
+    screenshot: "/portofoliu/pensiunea-raul-iulia.jpg",
     descriere:
       "Pensiune de 3 stele în Băile Felix, la 400 de metri de ștranduri. Camere cu bucătărie proprie, baie și aer condiționat, plus curte cu foișor și grătar.",
     livrabile: ["Site de prezentare", "Galerie foto", "Hartă și indicații", "Rezervare pe WhatsApp"],
@@ -235,6 +255,7 @@ export const clienti: Client[] = [
     categorie: "Turism",
     logo: "/logos/thermal-family-resort.png",
     logoFundal: "#f9fafa",
+    screenshot: "/portofoliu/thermal-family-resort.jpg",
     descriere:
       "Pensiune în Băile Felix cu trei piscine, grădină, terasă și bar. La 3,6 km de Aquapark President și la 7 km de Oradea, cu parcare și Wi-Fi gratuite.",
     livrabile: ["Site de prezentare", "Galerie foto", "Pagină de facilități", "Cerere de rezervare"],
@@ -248,6 +269,7 @@ export const clienti: Client[] = [
     categorie: "Educație",
     logo: "/logos/viovas.png",
     logoFundal: "#0d0e11",
+    screenshot: "/portofoliu/scoala-auto-viovas.jpg",
     descriere:
       "Școală auto din Iași, activă din 2006. Cursuri pentru categoriile A și A1, B, C, CE și D, cu parc auto propriu și instructori cu experiență.",
     livrabile: ["Site de prezentare", "Pagini pe categorii", "Formular de înscriere", "Optimizare SEO local"],
@@ -261,6 +283,7 @@ export const clienti: Client[] = [
     categorie: "Educație",
     logo: "/logos/traffic-liviu.png",
     logoFundal: "#08080a",
+    screenshot: "/portofoliu/traffic-liviu.jpg",
     descriere:
       "Școală de șoferi auto și moto din Bacău, deschisă din 2002. Categoriile B, B cu cutie automată, A, A2, A1 și AM, cu program lung de luni până sâmbătă.",
     livrabile: ["Site de prezentare", "Pagini pe categorii", "Program și tarife", "Înscriere pe WhatsApp"],
@@ -274,6 +297,7 @@ export const clienti: Client[] = [
     categorie: "Servicii tehnice",
     logo: "/logos/elektro-kasper.png",
     logoFundal: "#04090b",
+    screenshot: "/portofoliu/elektro-kasper.jpg",
     descriere:
       "Firmă de instalații electrice din Nürnberger Land: instalații, fotovoltaice, sisteme de securitate și stații de încărcare pentru mașini electrice. Site în germană, pentru clienți din Germania.",
     livrabile: ["Site de prezentare", "Site în germană", "Pagini pe servicii", "Formular de cerere ofertă"],
