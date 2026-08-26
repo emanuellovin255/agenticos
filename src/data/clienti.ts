@@ -44,10 +44,6 @@ export type Client = {
   screenshot?: string;
   /** 2-4 fraze despre locatie. Apare pe pagina clientului. */
   descriere: string;
-  /** Ce problema avea clientul inainte. Optional, dar convinge. */
-  provocare?: string;
-  /** Ce s-a schimbat dupa lansare. Optional, dar convinge cel mai tare. */
-  rezultat?: string;
   /** Ce ai livrat concret. Apare ca lista de etichete. */
   livrabile?: string[];
   /** ⚠ LINKUL CATRE SITEUL LIVE.
@@ -68,10 +64,6 @@ export const clienti: Client[] = [
     screenshot: "/portofoliu/pensiunea-izora.jpg",
     descriere:
       "Pensiune de 4 margarete în Crișan, pe brațul Sulina, în inima Deltei Dunării. Se ajunge doar pe apă, cu transfer cu barca de la Murighiol. Are bucătărie pescărească proprie, șalupe rapide și excursii la Letea, Mila 23, Caraorman și Sulina.",
-    provocare:
-      "Rezervările veneau aproape exclusiv prin platforme externe, care luau comision din fiecare noapte de cazare. Nu exista un loc unde oaspeții să vadă camerele și să scrie direct proprietarilor.",
-    rezultat:
-      "Site cu galerie pe camere și buton de rezervare directă pe WhatsApp, vizibil pe toate paginile. Oaspeții pot cere disponibilitate în mai puțin de zece secunde de la aterizarea pe site.",
     livrabile: ["Site de prezentare", "Galerie foto pe camere", "Rezervare pe WhatsApp", "Optimizare SEO local"],
     linkSite: "https://www.pensiuneaizora.com/",
     accent: "violet",
@@ -86,10 +78,6 @@ export const clienti: Client[] = [
     screenshot: "/portofoliu/pensiunea-belvedere.jpg",
     descriere:
       "Pensiune pe malul Lacului Murighiol, în zona protejată a Deltei Dunării, la aproximativ patru ore de mers cu mașina din București. Are restaurant pescăresc propriu, piscină cu apă încălzită și excursii cu barca pe șase trasee din Deltă.",
-    provocare:
-      "Aveau un profil de Facebook și atât. Fiecare întrebare despre preț sau disponibilitate se pierdea în mesaje, iar oaspeții nu aveau unde să vadă locația înainte să întrebe.",
-    rezultat:
-      "O pagină care răspunde singură la întrebările frecvente — prețuri, facilități, cum ajungi — și lasă doar decizia finală pentru conversația pe WhatsApp.",
     livrabile: ["Site de prezentare", "Secțiune întrebări frecvente", "Hartă și indicații", "Optimizare pentru mobil"],
     linkSite: "https://www.belvederemurighiol.ro/",
     accent: "galben",

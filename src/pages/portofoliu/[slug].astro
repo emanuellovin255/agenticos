@@ -57,29 +57,6 @@ const areLink = client.linkSite.trim() !== "";
         <p class="mt-4 text-lg text-muted">{client.descriere}</p>
       </section>
 
-      {(client.provocare || client.rezultat) && (
-        <div class="mt-8 grid gap-6 sm:grid-cols-2">
-          {client.provocare && (
-            <section class="nb reveal bg-crem p-6">
-              <h2 class="flex items-center gap-2 text-lg font-bold">
-                <span class="nb-mic grid h-9 w-9 place-items-center bg-coral"><Icon nume="lupa" marime={18} /></span>
-                Provocarea
-              </h2>
-              <p class="mt-4 text-muted">{client.provocare}</p>
-            </section>
-          )}
-          {client.rezultat && (
-            <section class="nb reveal bg-crem p-6">
-              <h2 class="flex items-center gap-2 text-lg font-bold">
-                <span class="nb-mic grid h-9 w-9 place-items-center bg-galben"><Icon nume="fulger" marime={18} /></span>
-                Rezultatul
-              </h2>
-              <p class="mt-4 text-muted">{client.rezultat}</p>
-            </section>
-          )}
-        </div>
-      )}
-
       {client.livrabile && client.livrabile.length > 0 && (
         <section class="reveal mt-10">
           <h2 class="text-2xl font-bold">Ce am livrat</h2>
